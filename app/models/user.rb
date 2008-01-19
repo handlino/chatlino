@@ -34,8 +34,8 @@ class User < ActiveRecord::Base
   end
 
   def shortname
-    nickname.blank? ? "Chatter #{id}" : nickname
-
+    name = nickname.blank? ? "Chatter #{id}" : nickname
+    return name.gsub(/(^https?:\/\/|\/$)/, '')
   end
 
   def is_contact_of?(another_user)

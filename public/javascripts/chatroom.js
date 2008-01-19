@@ -1,9 +1,16 @@
+Juggernaut.verbose_debug = true;
+
 // Juggernaut Overrides
-function flashConnected() {
+Juggernaut.connected = function () {
+    Juggernaut._verbose_log('You have been connected');
+
     new Ajax.Request('/chatroom/send_join', {
-                         parameters: { id: Chatroom.info.id },
-                         asynchronous: true, evalScripts:true
-                     });
+        parameters: {
+            id: Chatroom.info.id
+        },
+        asynchronous: true,
+        evalScripts:true
+    });
     Chatroom.Event.append("[INFO] Connected to juggernaut push server")
     Chatroom.Event.append("Chatroom subject updated")
 }
@@ -27,72 +34,10 @@ Chatroom.prototype = {
             'synchronize_subject': true
         };
         this.initRoomLayout();
-        if (Chatroom.PUSH_SOLUTION == 'ipush')
-            this.initIpush();
-    },
-
-    initIpush: function() {
-        Ipush.init({
-            profile: "chat",
-            onFailure: function() {
-                Chatroom.Event.append( _("Failed to connect to iPush server.") )
-                if ( !iplink.mypjax.init ) {
-                    Chatroom.Event.append( _("It appears that you do not have flash plugin installed. This Chatroom requires flash plugin, please install it.") );
-                }
-            },
-            onSubjectMessage: function(sbj, len, msg) {
-                try {
-                    var m = utf8to16(decode64(msg))
-                    eval(m);
-                } catch(e) { }
-            },
-            onStatus: function(status, msg) {
-                var channel = Chatroom.info.channel
-                Chatroom.Event.append("[" + status + "] " + msg)
-                if ( status == -100 ) {
-                    Chatroom.status.connected = false
-
-                    new Ajax.Request('/chatroom/send_leave/' + Chatroom.info.id, {asynchronous: false, evalScripts:true});
-
-                    // $("ipush-connection-indicator").innerHTML = "<a href=\"#\" onclick=\"Ipush.connect(); return false;\">" + _("Disconnected") + "</a>";
-
-                    if ( ! Chatroom.status.leaving ) {
-                        setTimeout(function(){
-                            Chatroom.Event.append( _("Auto-reconnecting... ") )
-                            Chatroom.connect();
-                        }, Math.floor(Math.random() * 1000) )
-                    }
-                } else if ( status == 200 ) {
-                    Chatroom.status.connected = true
-                    // $("ipush-connection-indicator").innerHTML = _("Connected")
-                    iplink.subSubject( channel );
-                    new Ajax.Request('/chatroom/send_join/' + Chatroom.info.id, {asynchronous: true, evalScripts:true});
-                } else if ( status == 700 ) {
-                    var subject = Chatroom.info.subject || 1000;
-                    Chatroom.changeSubject(subject)
-                    Chatroom.Event.append("Chatroom subject is target " + subject)
-                }
-            }
-        });
-
-        window.onunload = function() {
-            if (Chatroom.info) {
-                new Ajax.Request (
-                    "/chatroom/leave/" + Chatroom.info.id,
-                    {
-                        onComplete: function(){
-                            iplink.disconnect();
-                        }
-                    }
-                )
-            }
-        }
-
-        setInterval( Chatroom.ping, 1000 * 60 );
     },
 
     connect: function() {
-        Ipush.connect();
+        
     },
 
     initRoomLayout: function() {
@@ -205,9 +150,6 @@ Chatroom.prototype = {
                         "/chatroom/leave/" + Chatroom.info.id,
                         {
                             onComplete: function(){
-                                if ( Chatroom.PUSH_SOLUTION == 'ipush' ) {
-                                    iplink.disconnect();
-                                }
                                 window.close();
                             }
                         });
@@ -292,6 +234,7 @@ Chatroom.prototype = {
 
         return html;
     },
+
     join: function(me) {
         var user_element_id = "chatroom-userlist-user" + me.id
         Chatroom.Event.append(me.shortname + " joined")
@@ -639,12 +582,7 @@ window.onunload =  function() {
             "/chatroom/leave/",
             {
                 parameters: { id: Chatroom.info.id },
-                asynchronous: false,
-                onComplete: function(){
-                    if ( PUSH_SOLUTION == 'ipush' ) {
-                        iplink.disconnect();
-                    }
-                }
+                asynchronous: false
             });
     }
 };

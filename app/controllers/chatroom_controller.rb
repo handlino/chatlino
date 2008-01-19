@@ -171,13 +171,10 @@ class ChatroomController < ApplicationController
     if chatroom && chatroom.users.include?(@me)
       chatroom.users.delete(@me)
 
-      m = build_push_message("Chatroom.leave(#{user_to_json(@me)});")
+      send_push_data("Chatroom.leave(#{user_to_json(@me)});")
+
       msg = (_ "You left the room. This window are not closed automatically. You are able to see previous conversation logs, but not sending new chat messages.")
       render :update do |page|
-        page<<(m)
-        if PUSH_SOLUTION == 'ipush'
-          page<<("iplink.disconnect();")
-        end
         page<<("Chatroom.Event.append(#{msg.to_json})")
       end
     end
@@ -233,8 +230,6 @@ class ChatroomController < ApplicationController
   def send_join
     @chatroom = Chatroom.find(params[:id])
     @chatroom.users.push(@me) if !@chatroom.users.include?(@me)
-    # @me.last_seen = Time.now
-    @me.save
     send_push_data("Chatroom.join(#{user_to_json(@me)});")
   end
 
@@ -406,10 +401,6 @@ class ChatroomController < ApplicationController
     "
   end
 
-  def ipush_auth
-    render :text =>(Base64.encode64("Ipush.config = #{Ipush.config.to_json}").gsub(/\n/,'').to_json)
-  end
-
   def ping
     return render(:nothing => true)
     if !(params[:id] && @me)
@@ -444,21 +435,11 @@ class ChatroomController < ApplicationController
     if(! data)
       return render(:nothing => true)
     end
-    if (PUSH_SOLUTION == 'ipush')
-      m = build_push_message(data)
-      render :update do |page|
-        page<<(m)
-      end
-    elsif PUSH_SOLUTION == 'juggernaut'
-      Juggernaut.send(data, [ "chat.#{@chatroom.id}" ])
-      render :nothing => true
-    end
-  end
 
-  protected
-  def build_push_message(data)
-    m = Base64.encode64(data).gsub(/\n/,'').to_json
-    return "Ipush.send(#{m});"
+    if @chatroom
+      Juggernaut.send_data(data, [ "chat.#{@chatroom.id}" ])
+    end
+    render :nothing => true
   end
 
 end

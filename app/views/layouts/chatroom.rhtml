@@ -12,16 +12,14 @@
     <%= javascript_include_tag "jsan/Effect/RoundedCorners" %>
     <%= javascript_include_tag "jsan/Asynapse/Emoticon" %>
     <%= javascript_include_tag "jsan/Widget/Lightbox" %>
+    <%= javascript_include_tag "json" %>
 
     <% if @push_solution == "ipush" %>
       <%= javascript_include_tag "pjax/swfobject" %>
       <%= javascript_include_tag "pjax/pjax" %>
-    <% elsif @push_solution == "juggernaut" %>
-      <%= javascript_include_tag "juggernaut_javascript" %>
+      <%= javascript_include_tag "ipush" %>
     <% end %>
 
-    <%= javascript_include_tag "json" %>
-    <%= javascript_include_tag "ipush" %>
     <%= javascript_include_tag "chatroom" %>
   </head>
 
@@ -36,7 +34,7 @@
           var iplink = new iPush2Link();
       </script>
     <% elsif @push_solution == "juggernaut" %>
-    <%= flash_plugin([ "chat.#{@chatroom.id}" ]) %>
+      <%= listen_to_juggernaut_channels([ "chat.#{@chatroom.id}" ]) %>
     <% end %>
 
     <div id="container">
