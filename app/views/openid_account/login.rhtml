@@ -1,0 +1,22 @@
+<%= start_form_tag :action=> "login" %>
+
+<div title="Account login" id="loginform" class="form">
+    <h3>Please login with your OpenID</h3>
+    
+    <label for="user_login">Login:</label>
+    <input type="text" name="openid_url" id="openid_url" size="30" value=""/><br/>
+    <p>e.g:, user.livejorunal.com</p>
+
+    <br/>
+    <input type="submit" name="login" value="Login &#187;" class="primary" />
+
+    <br/><br/>
+
+    <p>Don't have OpenID ?
+      Login as Yahoo user via <a href="http://idproxy.net/">idproxy</a>,
+      or register one on <a href="http://claimid.com/">ClaimID</a>
+    </p>
+</div>
+
+<%= end_form_tag %>
+

@@ -1,0 +1,48 @@
+/* Complex Bar Graph */
+div#complex_bar_graph dl { 
+	margin: 0; 
+	padding: 0;   
+	font-family: "Lucida Grande", Verdana, Arial;	
+}
+div#complex_bar_graph dt { 
+	position: relative; /* IE is dumb */
+	clear: both;
+	display: block; 
+	float: left; 
+	width: 104px; 
+	height: 20px; 
+	line-height: 20px;
+	margin-right: 17px;              
+	font-size: .75em; 
+	text-align: right; 
+}
+div#complex_bar_graph dd { 
+	position: relative; /* IE is dumb */
+	display: block;   
+	float: left;	 
+	width: 197px; 
+	height: 20px; 
+	margin: 0 0 5px; 
+	background: url("/images/css_graphs/g_colorbar.jpg"); 
+}
+* html div#complex_bar_graph dd { float: none; } /* IE is dumb; Quick IE hack, apply favorite filter methods for wider browser compatibility */
+
+div#complex_bar_graph dd div { 
+	position: relative; 
+	background: url("/images/css_graphs/g_colorbar2.jpg"); 
+	height: 20px; 
+	width: 75%; 
+	text-align:right; 
+}
+div#complex_bar_graph dd div strong { 
+	position: absolute; 
+	right: -5px; 
+	top: -2px; 
+	display: block; 
+	background: url("/images/css_graphs/g_marker.gif"); 
+	height: 24px; 
+	width: 9px; 
+	text-align: left;
+	text-indent: -9999px; 
+	overflow: hidden;
+}

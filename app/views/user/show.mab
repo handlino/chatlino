@@ -1,0 +1,37 @@
+image_tag @user.photo_path
+h2 { _("%s") % @user.shortname }
+
+if @email_confirmed
+  p { _"Email confirmed" }
+else
+  p { _"Email not confirmed"}
+end
+
+if @is_contact 
+	p { _("%s is your contact. %s") % [@user.shortname, link_to(_"Modify?", :controller=>"contact")] }
+elsif !@me.is_guest? && @user != @me
+  p { link_to(_("Add %s as your contact?") % @user.shortname, :controller=>"contact", :action=>"add", :id=>@user.id)}
+end
+
+ul {
+	li { _("Fullname: %s") % @user.user_name }
+	li { 
+	  link_to _("&rarr; History on YouHolder") % @user.shortname, 
+	    :action => "history", :id => @user.id
+	}
+}
+
+h2 { _("%s's Prediction Accuracy") % @user.shortname } 
+
+ul {
+	li { _("Overall accuracy: %f") % @oa }
+	li { _("Stock accuracy: %f") % @sa}
+}
+
+h3 { _("Most Accurate Targets") }
+
+generate_table(@mat, [_("Target Symbol"), _("Target Name"), _("Accuracy")],
+  [:target_symbol, :target_name, :accuracy],
+  {
+    :target_symbol => lambda{|s| link_to s, {:controller => "target", :action=>"show", :id=>s}},
+  })

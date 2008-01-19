@@ -1,0 +1,9 @@
+div.doc3! {
+  div.hd! do
+
+    h1 (:id => "site-name") {
+      img :src => "/images/logo.png", :alt => "Chatlino"
+    }
+
+  end
+}

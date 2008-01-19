@@ -1,0 +1,8 @@
+p { 
+  link_to _("&larr; Back to %s's profile") % @user.shortname, 
+    :action=>"show", :id=>@user.id
+}
+
+h2 { _("Latest Stories by %s") % @user.shortname }
+
+render :partial => 'story/stories'

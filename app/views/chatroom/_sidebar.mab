@@ -1,0 +1,11 @@
+if @chatroom 
+  div(:id  => "chatroom-userlist") {
+    @chatroom.users.each do |u|
+      div :class => "item", :id => "chatroom-userlist-user#{u.id}" do
+        image_tag u.photo_path, :size => "24x24"
+        span { user_shortname_with_link(u) }
+      end
+    end
+  }
+end
+

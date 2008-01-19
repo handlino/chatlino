@@ -1,0 +1,55 @@
+h2 { _"Invite a Friend to the Investment Circle!" }
+
+if request.method == :get || !@invitation.errors.empty?
+
+	error_messages_for "invitation"
+
+	form_tag :action=>"invite" do
+    div :class => "s-form" do
+      label (:for => "invitation_email") { _"To:" }
+    	text_field "invitation", "email"
+    	br
+
+      label (:for => "invitation_subject") { _"Subject:" }
+    	text_field "invitation", "subject"
+    	br
+
+      label (:for => "invitation_message") { _"Message for the user:" }
+    	text_area "invitation", "message", :size => "60x5"
+    	br
+
+    	submit_tag (_"Send Invitation"), { :class => "submit" }
+    end
+	end
+else
+	h2 { _"Your Invitation Is Sent"}
+	
+	p {
+		_("An invitation will be delivered to %s. You'll be notified when he or she accepts it.") % @invitation.email 
+	}
+	
+	p {
+		link_to _("Send another invitation"), :action=>"invite"
+	}
+end
+
+h2 { _"Invitations Waiting for Reply" }
+
+if @unaccepted && @unaccepted.length > 0
+  generate_table @unaccepted, [_("Email Address"), _("Invitation Sent on")],[:email, :created_at], {:created_at=>datetime_formatter}
+else
+  p { _"You have no invitation waiting for reply. Invite someone in!" }
+end
+
+if @accpeted && @unaccepted.length > 0
+  h2 { _"Accepted Invitations" }
+
+  generate_table @accepted, [_("Email Address"), _("Invitation Sent on"), _("Accepted on"), _("Registered as")],
+    [:email, :created_at, :accepted_at, :registered_user_id],
+    {
+      :registered_user_id => lambda {|u| user_shortname_with_link(User.find(u)) }, 
+      :created_at => datetime_formatter, 
+      :accepted_at => datetime_formatter
+    }
+end
+

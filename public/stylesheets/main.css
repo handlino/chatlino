@@ -1,0 +1,320 @@
+@import "yui/reset-fonts-grids/reset-fonts-grids.css";
+@import "yui/menu/menu.css";
+@import "yui/tabview/tabview.css";
+@import "yui/tabview/border_tabs.css";
+@import "ext/css/ext-all.css";
+@import "css_graphs/cssgraphs.css";
+@import "scaffold.css";
+
+body {
+    background: #e5eff7;
+}
+
+#doc3 {
+    margin: auto;
+    background: #4e759d url(/images/headertop.gif) repeat-x;
+    padding: 25px 0 0;
+}
+
+a:link, a:visited, a:active {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* =Header
+----------------------------------------------- */
+#hd {
+    /* style from #doc2 */
+    width:73.074em;*width:71.313em;min-width:950px;
+    margin:auto;text-align:left;
+}
+
+#hd h1 {
+    color: #fff;
+    float: left;
+}
+
+#util {
+    float: right;
+    text-align: right;
+    margin: 9px 0 10px;
+    padding: 10px 15px;
+    color: #e5eff7;
+    background: url(/images/background_line.gif);
+}
+#util img {
+    vertical-align: middle;
+}
+
+#util p,
+#util label {
+    line-height: 1.7em;
+}
+
+#util span {
+    color: #003;
+}
+#util li {
+    display: inline;
+    padding: 0 8px;
+}
+#util a:link,
+#util a:visited {
+    color: #ffc;
+    text-decoration: none;
+}
+#util a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.input-holder,
+.submit-holder {
+    display: inline;
+}
+.input-holder {
+    padding-right: 5px;
+}
+
+#user_save_cookie,
+#user_agree_term {
+    margin-right: 3px;
+}
+
+#util .rememberme-holder p {
+    display: inline;
+}
+
+#util #user_email,
+#util #user_password,
+#util #user_password_confirmation {
+    width: 100px;
+    border: 0;
+    background: #ffc;
+}
+#util #user_email { width: 130px; }
+
+#target-nav {
+    color: #fff;
+    clear: both;
+    float: right;
+    width: 25%;
+    text-align: right;
+    margin-top: 8px;
+    padding: 0 15px 5px 0;
+}
+#target-nav #s {
+    width: 100px;
+    margin: 0 7px;
+}
+
+/* =Nav
+----------------------------------------------- */
+#nav {
+    clear: left;
+    margin-right: 40%;
+    margin-left: -3px;
+    background-color: transparent;
+    height: 1%;
+}
+
+#nav li.yuimenubaritem {
+    border: 0;
+    background-color: #3e5e7e;
+    color: #e5eff7;
+    padding: 10px 15px;
+    margin: 0 3px;
+    font-size: 100%;
+    line-height: 1em;
+}
+
+#nav li.yuimenubaritem a {
+    color: #e5eff7;
+}
+
+#nav li.hassubmenu em.submenuindicator {
+    background-position: 0 -40px;
+}
+#nav li.hassubmenu em.submenuindicator.selected {
+    background-position:0 -32px;
+}
+#nav li.current {
+    background: #fdfee8 url(/images/target/nav_selected.gif) repeat-x top;
+}
+#nav li.yuimenubaritem a.current {
+    color: #000;
+}
+
+/* =Body
+----------------------------------------------- */
+#bd {
+    padding: 20px;
+    background: url(/images/bdtop.gif) repeat-x top;
+}
+
+
+#bd h2 {
+    font-size: 197%;
+    color: #3e5e7e;
+    margin: 15px 0 10px;
+}
+
+#bd h3 {
+    font-size: 144%;
+    color: #377;
+    margin: 10px 0 5px;
+}
+
+/* =Footer
+----------------------------------------------- */
+#ft {
+    padding: 15px 10px;
+    margin: 15px 0;
+    background: #cedde9 url(/images/ft.gif);
+    color: #385777;
+}
+#ft a {
+    display: block;
+    margin: 0 10px 10px 0;
+    color: #385777;
+    text-decoration: none;
+    border-bottom: 1px solid #385777;
+}
+#ft a:hover {
+    color: #963;
+    margin: 0 10px 9px 0;
+    border-bottom: 2px solid #fc3;
+}
+
+#ft li {
+    float: left;
+    line-height: 1em;
+}
+#ft p {
+    clear: left;
+    line-height: 1.5em;
+}
+#ft p.disclaimer {
+    font-size: 85%;
+    line-height: 1.2em;
+}
+
+/* =Ext
+----------------------------------------------- */
+.x-dlg-mask {
+    background:#000;
+}
+
+/* =Form (simple)
+----------------------------------------------- */
+.s-form {
+    margin-top: 1em;
+}
+.s-form label,
+.s-form input,
+.s-form textarea {
+    padding: 0.2em;
+}
+.s-form label
+{
+	display: block;
+    width: 150px;
+	float: left;
+	margin-bottom: 10px;
+}
+.s-form label {
+	text-align: right;
+	width: 10em;
+	padding-right: 1em;
+}
+.s-form .submit {
+    display: block;
+    margin: 0 0 0 11.2em;
+}
+.s-form br {
+	clear: left;
+}
+.s-form div.rememberme-holder {
+    margin: 10px 0 10px 11.2em;
+}
+.s-form span.description {
+    margin-left: 5px;
+}
+.s-form div.terms {
+    margin: 0 0 10px 11.2em;
+}
+.s-form p {
+    margin: 0 0 0 11.2em;
+}
+.s-form #error-msg {
+    margin: 0 0 5px 11.2em;
+    color: #900;
+    font-weight: bold;
+}
+
+/* =Flash Messages
+----------------------------------------------- */
+.flash_notice,
+.flash_form_error,
+.flash_error {
+    margin-bottom: 10px;
+    border: 1px solid #966;
+}
+.flash_notice {
+    background: #cfa;
+}
+.flash_form_error,
+.flash_error {
+    background: #fca;
+}
+.flash_notice p,
+.flash_error p,
+.flash_form_error p {
+    margin: 0 10px;
+    padding: 10px 0;
+}
+
+/* =Table
+----------------------------------------------- */
+table.auto th,
+table.auto td {
+    padding: 2px 10px 0 0;
+    border-bottom: 1px solid #ccc;
+}
+table.auto th {
+    border-bottom: 1px solid #666;
+    font-weight: bold;
+}
+table.auto img {
+    vertical-align: middle;
+}
+
+/* =Story
+----------------------------------------------- */
+.story {
+    margin-bottom: 0.5em;
+    padding-left: 3em;
+    position: relative;
+}
+.story h3 {
+    font-weight: bold;
+}
+.story .digg {
+    position: absolute;
+    font-size: 3em;
+    top: 0;
+    left: 0;
+}
+
+/* =Hack
+----------------------------------------------- */
+span.png img{_behavior/**/:expression(iePNGFix(this));_visibility/**/:hidden;/*IE5.5~IE6*/}
+
+/* =Misc
+----------------------------------------------- */
+.hide {
+    display: none;
+}

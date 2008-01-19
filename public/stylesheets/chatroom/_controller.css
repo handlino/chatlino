@@ -1,0 +1,227 @@
+body#chatroom {
+  text-align: left;
+}
+
+h1.title {
+    font-size: 1.8em;
+}
+
+#chat-screen {
+   width:100%;
+}
+
+#content {
+    margin: 0;
+}
+
+.tgtdata li {
+    float: left;
+    display: block;
+}
+
+.chat-event {
+    background: #f0f0ff;
+    color: #666;
+}
+
+#chat-data ,
+#chat-data-tbody {
+    width:100%;
+    border-collapse: collapse;
+    table-layout: auto;
+    font: 1em 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace;
+}
+
+#chat-data-tbody td {
+    padding: 5px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+#chat-data td.chat-data-username {
+    padding: 5px 0 2px;
+    width: 100px;
+    text-align: center;
+    vertical-align: top;
+    border-right: 1px dotted #aaa;
+}
+
+#chat-data td.chat-data-time {
+    width: 30px;
+}
+
+#chat-data td.chat-data-username span {
+    color: #333;
+    font-size: 0.7em;
+}
+
+#chat-data td.chat-data-username img {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+}
+
+#chat-data img {
+    vertical-align: middle;
+    margin: 5px;
+}
+
+.chat-data-act {
+    font-weight: bold;
+    font-style: italic;
+    background: #ffa;
+    list-style: none;
+    margin: 5px 0;
+    color:#444;
+}
+
+.chat-data-act .chat-data-username {
+    text-align: right;
+}
+
+.chat-data-time {
+    text-align:right;
+    width: 20px;
+    font-size:7pt;
+    border-right: 1px dotted #aaa;
+}
+
+.chat-event td {
+    padding: 8px;
+}
+
+#chat-input-area {
+   vertical-align: top;
+   margin: 0 auto;
+}
+
+#chat-input-area img {
+   margin: 2px 0 0 0px;
+   border: none;
+}
+
+#chat-input-area textarea {
+   margin: 1px;
+   border: none;
+   width: 99%;
+   height: 59px;
+   background:#ffe;
+}
+
+#chat-input-area textarea:focus {
+   background:#ffd;
+   border: none;
+}
+
+#chat-input-userinfo {
+   text-align: center;
+}
+
+#chat-input-submit {
+   display:block;
+   text-align: center;
+   vertical-align: middle;
+   width: 50px;
+   margin: 0 auto;
+}
+
+#chat-input {
+   border: 1px solid #ccc;
+   padding: 0.2em 0.1em;
+   line-height: 1.3em;
+   overflow: hidden;
+}
+
+#chat-subject-input .hd {
+   width:100px;
+   float:left;
+   height: 20px;
+}
+
+#chat-subject-input .bd {
+   height: 20px;
+}
+
+#chatroom-subject-object {
+   z-index: 0;
+}
+
+.chatroom-owner-indicator {
+   vertical-align: super;
+   font-size:7pt;
+   color: #0a0;
+   font-weight:normal;
+   padding-left: 2px;
+}
+
+.chatroom-list .chatroom-title {
+   margin: 5px 11px 5px 11px;
+}
+
+.chatroom-list div.chatroom-title h3 {
+   font-weight:bold;
+   font-size:1.4em;
+   color:#555;
+}
+
+.chatroom-list div.chatroom-description {
+    position: relative;
+   margin: 0 0 11px 11px;
+   padding: 0 0 5px 0;
+   border-bottom: 1px solid #eee;
+}
+div.chatroom-description .join {
+    float: right;
+    margin-top: -30px;
+}
+#chatroom-userlist {
+    margin: 5px 0;
+}
+
+#chatroom-userlist .item {
+    height: 25px;
+    margin: 0 5px;
+}
+
+#chatroom-userlist .item img {
+    vertical-align: middle;
+}
+
+#chatroom-userlist .item span {
+    margin-left: 5px;
+}
+
+/* yui style */
+.x-layout-panel-hd, .x-layout-panel-body {
+    text-align: left;
+}
+
+#topmenu .x-toolbar {
+    overflow: hidden;
+    width: 100%;
+}
+#topmenu .x-toolbar table {
+    float: right;
+}
+
+#chatroom-help-tab {
+  padding: 10px;
+}
+#chatroom-help-tab .help {
+  text-align: left;
+}
+#chatroom-help-tab .help th {
+  font-weight: bold;
+  color: navy;
+}
+#chatroom-help-tab .help th,
+#chatroom-help-tab .help td {
+  padding: 2px 5px;
+}
+#chatroom-help-tab .help thead th {
+  border-bottom: 1px solid #999;
+  padding: 0 5px;
+  font-size: 107%;
+  color: #333;
+}
+

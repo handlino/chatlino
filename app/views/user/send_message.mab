@@ -1,0 +1,17 @@
+h2 { (_"Send message to user %s") % @user.shortname }
+
+form_tag :controller => "message", :action => "post" do
+  div {
+    label { _"Subject: " } 
+    text_field "message", "subject"
+    
+    br
+    label { _"Body:" }
+    text_area "message", "body"
+   
+    hidden_field "message", "to_user_id"
+   
+    br
+    submit_tag _"Send to user"
+  }
+end

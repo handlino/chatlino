@@ -1,0 +1,76 @@
+# for yui-ext NestedLayoutPanel
+div :id => 'top', :class => 'x-layout-inactive-content' do
+  div :id => 'topmenu' do
+  end
+end
+
+div :id => 'content', :class => 'x-layout-inactive-content' do
+end
+
+div :id => 'chat-subject', :class => 'x-layout-inactive-content' do
+  div :id => 'chat-subject-toolbar' do
+  end
+  div :id => 'chat-subject-object' do
+    div :style =>"line-height: 280px; text-align: center;" do
+      image_tag "/images/logo.png"
+    end
+  end
+end
+
+div :id => "chat-screen", :class => 'x-layout-inactive-content' do
+  table :id => "chat-data" do
+    tbody :id => "chat-data-tbody" do
+    end
+  end
+end
+
+div(:id => "chat-input-area", :class => 'x-layout-inactive-content') {
+  div(:id => "chat-input-textarea", :class => 'x-layout-inactive-content') {
+    form_remote_tag(
+      :html => {
+        :id => "chat-input-form"
+      },
+      :url => { :action => 'send_chat_message', :id => @chatroom.id },
+      :loading => "Form.disable('chat-input-form')",
+      :complete =>
+      "$('chat-input').value='';Form.enable('chat-input-form');$('chat-input').focus()") {
+      div {
+        text_area_tag "chat-input", ""
+        input(:type => "submit", :id => "chat-input-submit", :value => (_"Send"), :style => "display:none;")
+      }
+    }
+  }
+  div(:id => "chat-input-userinfo", :class => 'x-layout-inactive-content') {
+    image_tag @me.photo_path, :id => "chat-input-userinfo-photo", :style => "width:95%;height:95%;margin:1px auto 0 auto;"
+  }
+}
+
+render :partial => "change_user_photo_dlg"
+
+chatroom_to_json = {
+  :id => @chatroom.id,
+  :subject => @chatroom.subject,
+  :sketch  => @chatroom.sketch,
+  :channel => "#{@subject_prefix}.#{@chatroom.id}",
+  :owner => user_to_hash(@chatroom.owner),
+  :users => @chatroom.users.map { |u| user_to_hash(u) }
+}.to_json
+
+script :type => "text/javascript" do
+<<JS
+
+Ext.onReady( function() {
+    Chatroom.init(#{chatroom_to_json}, #{user_to_json(@me)});
+    Chatroom.connect();
+});
+
+YAHOO.util.Event.onAvailable(
+    "chat-input-userinfo-photo",
+    Chatroom.initChangeUserPhotoHandler,
+    Chatroom,
+    true
+)
+
+JS
+end
+

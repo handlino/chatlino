@@ -1,0 +1,79 @@
+div :id => "account-dlg", :class => "x-layout-inactive-content" do
+
+  div :class => "x-dlg-hd" do
+    _"Login Dialog"
+  end
+  
+  div :class => "x-dlg-bd" do
+  
+    div :class => "x-dlg-tab", :title => _("Sign In") do
+      div :class => "inner-tab" do
+                
+        form_remote_tag :url=> {:controller => "account", :action => "ajax_login", :id => controller.controller_name } do
+        
+          div do
+            
+            label (:for => "user_email") { _"Your E-Mail:" }
+          	text_field "user", "email", { :class => "first" }
+          	br
+        	
+            label (:for => "user_password") { _"Password:" }
+          	password_field "user", "password"
+          	br
+
+          	p { submit_tag _"Sign In" }
+
+          	p :id => "errorExplanation", :style => "margin-top: 5px; display:none" do
+          	   (_"Login unsuccessful")
+        	  end
+          	
+        	end
+        end
+        
+      end
+    end
+
+    div :class => "x-dlg-tab", :title => _("Sign Up") do
+      div :class => "inner-tab" do
+      
+        div :class => "error-msg" do
+          error_messages_for "user"
+        end
+        
+        form_tag :controller => "account", :action => "signup" do
+          div do
+            
+            label (:for => "reg_user_email") { _"Your E-Mail:" }
+            input :id => "reg_user_email", :name => "user[email]", :size => "30", :type => "text", :class => "first"
+          	br
+          
+            
+            label (:for => "reg_user_password") { _"Password:" }
+            input :id => "reg_user_password", :name => "user[password]", :size => "30", :type => "password"
+          	br
+        	
+          	label (:for => "reg_user_password_confirmation") { _"Confirm:" }
+          	input :id => "reg_user_password_confirmation", :name => "user[password_confirmation]", :size => "30", :type => "password"
+          	br
+          	
+          	p do
+          	  text _("I agree to the ") +  link_to(_("terms of service"), :controller => "service", :action => "terms")
+          	  check_box "user", "agree_term", {}, "y", "n"
+        	  end
+
+          	p { submit_tag _"Sign Up" }
+        	end
+        end
+        
+      end
+    end
+  
+  end
+
+end
+
+script :type => "text/javascript" do
+<<JS
+YAHOO.util.Event.onContentReady("account-dlg", YouHolder.Util.accountDialog.init);
+JS
+end

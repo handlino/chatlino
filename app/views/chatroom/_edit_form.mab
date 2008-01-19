@@ -1,0 +1,22 @@
+div :id => "message" do
+  text @message
+end
+
+form_remote_tag( :url => { :action => controller.action_name } ) {
+  div do
+    hidden_field "chatroom", "id"
+    dl do
+      dt { _"Title" }
+      dd do
+        text_field "chatroom", "title"
+      end
+
+      dt { _"Description" }
+      dd do
+        text_area "chatroom", "description"
+      end
+    end
+    submit_tag _("Save")
+  end
+}
+

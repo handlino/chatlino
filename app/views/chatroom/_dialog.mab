@@ -1,0 +1,90 @@
+div :id => "chatroom-general-dlg", :class => "x-layout-inactive-content" do
+
+  div :class => "x-dlg-hd" do
+    _"Chatroom Dialog"
+  end
+  
+  div :class => "x-dlg-bd" do
+  
+    div :id => "chatroom-help-tab", :class => "x-dlg-tab", :title => _("Help") do
+      div :class => "inner-tab" do
+        table(:class => "help") {
+          thead {
+            tr {
+              th { _"Command" }
+              th { _"Description" }
+            }
+          }
+          tbody {
+            tr {
+              th { _"/help" }
+              td { _"Show this help" }
+            }
+
+            tr {
+              th { _"/nick" }
+              td { _"Change your nickname" }
+            }
+
+            tr {
+              th { _"/me" }
+              td { _"Perform an action with highlight" }
+            }
+
+            tr {
+              th { _"/kick" }
+              td { _"Onwer-only command. Kick somebody out from this channel so he/she cannot talk." }
+            }
+            
+          }
+        }
+      end
+    end
+
+    div :id => 'change-user-photo-tab', :class => "x-dlg-tab", :title => _("My Photo") do
+      div :class => "inner-tab" do
+        form_remote_tag(
+          :url => { :action => 'change_user_photo' },
+          :complete => "Chatroom.dialog.hide();") {
+
+          div(:id => "change-user-photo-dlg-content") {
+            div {
+              h2 { (_"Change Your Photo Path") }
+              image_tag @me.photo_path, { :class => 'user-photo' }
+              br
+
+              label { "URL:" }
+              text_field_tag "user-photo", @me.photo_path, { :size => "40" }
+              br
+
+              input(:type => "submit", :value => (_"Set"))
+            }
+          }
+
+        }
+      end
+    end
+
+    div :id => "chatroom-topic-tab", :class => "x-dlg-tab", :title => _("Topic") do
+       div :class => "inner-tab" do
+        form_remote_tag(
+          :url => { :action => 'send_chat_subject' },
+          :complete => "Chatroom.dialog.hide();") {
+
+          div(:id => "change-topic-dlg-content") {
+            div {
+              h2 { (_"Change Chatroom Topic") }
+              hidden_field "chatroom", "id"
+              text_area "chatroom", "subject", :size => "40x10"
+              p { "Paste HTML please" }
+              br
+              input(:type => "submit", :value => (_"Set"))
+            }
+          }
+        }
+      end
+    end
+
+  end
+end
+

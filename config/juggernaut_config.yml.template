@@ -1,0 +1,28 @@
+#-------------------- Push Server Configuration ---------------------------#
+
+
+#This is the port that the push server will be on.
+PUSH_PORT: $pushport
+
+
+#This is the host that the push server will be on.
+#Usually it would be 0.0.0.0
+PUSH_HOST: "0.0.0.0"
+
+#This should be the url as seen from the browser.
+#Flash's xmlsocket can only connect to addresses in the same domain
+#or subdomain. For example, if people access your app from www.test.com than this
+#should be "test". Omit the port number and the 'http://'.
+PUSH_HELPER_HOST: $host
+
+#This is a 'secret' send by the broadcaster to validate identity.
+PUSH_SECRET: "4815162342yola"
+
+
+#This must be the host that your crossdomain policy is located at
+CROSSDOMAIN: "http://$host:$port/crossdomain.xml"
+
+# number of simultaneous handler threads
+PUSH_LISTEN_THREADS: 8
+
+
