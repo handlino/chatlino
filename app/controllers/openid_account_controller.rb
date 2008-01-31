@@ -61,7 +61,7 @@ class OpenidAccountController < ApplicationController
       # access to both bits of information.  Change as needed.
       session[:user_id] = @user.id
 
-      flash[:notice] = "Logged in as #{CGI::escape(@user.nickname)}"
+      flash[:notice] = "Logged in as #{CGI::escape(@user.shortname)}"
 
       redirect_back_or_default :controller => "chatroom", :action => "index"
       return

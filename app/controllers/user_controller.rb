@@ -34,22 +34,22 @@ class UserController < ApplicationController
 
     @email_confirmed = @user.email_confirmed
 
-    @groups = @user.groups
+#    @groups = @user.groups
 
-    @is_my_contact = @user.has_contact?(@me)
+#    @is_my_contact = @user.has_contact?(@me)
 
-    @msg = UserMessage.new
-    @msg.box = 'inbox'
-    @msg.from_user = @me
-    @msg.to_user = @user
-    @msg.subject = 'Default subject'
+#     @msg = UserMessage.new
+#     @msg.box = 'inbox'
+#     @msg.from_user = @me
+#     @msg.to_user = @user
+#     @msg.subject = 'Default subject'
 
-    @oa = UserStatistics.overall_accuracy_for_user(@user.id)
-    @sa = UserStatistics.stock_accuracy_for_user(@user.id)
-    @mat = UserStatistics.most_accurate_targets_for_user(@user.id)
+#     @oa = UserStatistics.overall_accuracy_for_user(@user.id)
+#     @sa = UserStatistics.stock_accuracy_for_user(@user.id)
+#     @mat = UserStatistics.most_accurate_targets_for_user(@user.id)
 
   rescue
-    redirect_to :controller=>'dashboard'
+    redirect_to :uri => '/'
   end
 
   def invite
