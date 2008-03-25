@@ -4,4 +4,5 @@
 // Dummy l10n placeholder.
 _ = function(str) { return str }
 
-
+Juggernaut.debug = false;
+Juggernaut.verbose_debug = false;

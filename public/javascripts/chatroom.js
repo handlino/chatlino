@@ -1,4 +1,5 @@
-Juggernaut.verbose_debug = true;
+Juggernaut.debug = false;
+Juggernaut.verbose_debug = false;
 
 // Juggernaut Overrides
 Juggernaut.connected = function () {
