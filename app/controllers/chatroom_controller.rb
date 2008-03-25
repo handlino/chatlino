@@ -1,5 +1,3 @@
-require 'ipush'
-
 class ChatroomController < ApplicationController
   yullio_column_template :yui_t6
 
@@ -17,7 +15,7 @@ class ChatroomController < ApplicationController
   end
 
   def show
-    @subject_prefix = Ipush.config["chat"]["subject_prefix"]
+    @subject_prefix = "chat"
     @chatroom = Chatroom.find(params['id'])
   end
 
@@ -270,7 +268,7 @@ class ChatroomController < ApplicationController
     t = Time.now
     input_data = {
       :time => "#{t.hour}:#{t.min}",
-      :body => escape_javascript(Ipush.html_and_string_escape(msg))
+      :body => escape_javascript( self.html_escape(msg) )
     }.to_json
 
     data = ""
@@ -433,13 +431,21 @@ class ChatroomController < ApplicationController
 
   def send_push_data(data)
     if(! data)
-      return render(:nothing => true)
+      render :nothing => true
+      return
     end
 
     if @chatroom
       Juggernaut.send_data(data, [ "chat.#{@chatroom.id}" ])
     end
+
     render :nothing => true
+  end
+
+  protected
+
+  def html_escape(s)
+    s.to_s.gsub(/&/, "&amp;").gsub(/\"/, "&quot;").gsub(/>/, "&gt;").gsub(/</, "&lt;").gsub(/'/,"&#145;").gsub(/\\/, "&#92;")
   end
 
 end
