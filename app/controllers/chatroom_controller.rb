@@ -220,7 +220,7 @@ class ChatroomController < ApplicationController
   def save_chatlog
     if request.post?
       render :update do |page|
-        page.alert(_ "Not Implemented")
+        page.alert(_("Not Implemented"))
       end
       return
     end

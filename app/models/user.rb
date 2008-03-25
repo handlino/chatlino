@@ -46,14 +46,6 @@ class User < ActiveRecord::Base
     self.contacts.include? another_user
   end
 
-  def target_watches_as_seen_by_user(user)
-    if has_contact?(user)
-      target_watches.find(:all, :conditions=>"access='public' or access='contact'")
-    else
-      target_watches.find(:all, :conditions=>"access='public'")
-    end
-  end
-
   def self.guest
     User.new
   end
