@@ -1,0 +1,90 @@
+<div id="chatroom-general-dlg" class="x-layout-inactive-content">
+
+  <div class="x-dlg-hd">
+    <%= _"Chatroom Dialog" %>
+  </div>
+  
+  <div class="x-dlg-bd">
+  
+    <div id="chatroom-help-tab" class="x-dlg-tab" title=<%= _("Help") %> >
+      <div class="inner-tab">
+        <table class="help">
+          <thead>
+            <tr>
+              <th><%= _"Command" %></th>
+              <th><%= _"Description" %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th><%= _"/help" %></th>
+              <td><%= _"Show this help" %></td>
+            </tr>
+
+            <tr>
+              <th><%= _"/nick" %></th>
+              <td><%= _"Change your nickname" %></td>
+            </tr>
+
+            <tr>
+              <th><%= _"/me" %></th>
+              <td><%= _"Perform an action with highlight" %></td>
+            </tr>
+
+            <tr>
+              <th><%= _"/kick" %></th>
+              <td><%= _"Onwer-only command. Kick somebody out from this channel so he/she cannot talk." %></th>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id='change-user-photo-tab' class="x-dlg-tab" title=<%= _("My Photo") %> >
+      <div class="inner-tab">
+        <% form_remote_tag(
+          :url => { :action => 'change_user_photo' },
+          :complete => "Chatroom.dialog.hide();") do %>
+
+          <div id="change-user-photo-dlg-content">
+            <div>
+              <h2><%= (_"Change Your Photo Path") %><h2>
+              <%= image_tag @me.photo_path, { :class => 'user-photo' } %>
+              <br>
+
+	      <label>URL: <label>
+              <%= text_field_tag "user-photo", @me.photo_path, { :size => "40" } %>
+              <br>
+
+	      <%= submit_tag _"Set" %>
+            </div>
+          </div>
+
+        <% end %>
+      </div>
+    </div>
+
+    <div id="chatroom-topic-tab" class="x-dlg-tab" title=<%= _("Topic") %> >
+      <div class="inner-tab">
+        <% form_remote_tag(
+          :url => { :action => 'send_chat_subject' },
+          :complete => "Chatroom.dialog.hide();") do %>
+
+          <div id="change-topic-dlg-content">
+            <div>
+              <h2><%= _"Change Chatroom Topic" %></h2>
+              <%= hidden_field "chatroom", "id" %>
+              <%= text_area "chatroom", "subject", :size => "40x10" %>
+              <p>Paste HTML please</p>
+              <br>
+	      <%= submit_tag _"Set" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+</div>
+

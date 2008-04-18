@@ -1,0 +1,19 @@
+<div class="yui-g">
+    <% form_tag :controller => "chatroom", :action => "create" do %>
+        <div>
+            <%= hidden_field "chatroom", "id" %>
+            <dl>
+              <dt><%= _"Title" %></dt>
+              <dd>
+                <%= text_field "chatroom", "title" %>
+              </dd>
+   
+              <dt><%= _"Description" %></dt>
+              <dd>
+                <%= text_area "chatroom", "description" %>
+              </dd>
+            </dl>
+            <%= submit_tag _("Save") %>
+        </div>
+    <% end %>
+</div>

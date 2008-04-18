@@ -1,0 +1,68 @@
+# for yui-ext NestedLayoutPanel
+<div id="top" class="x-layout-inactive-content">
+    <div id="topmenu">
+    </div>
+</div>
+
+<div id='content', class='x-layout-inactive-content'>
+</div>
+
+<div id='chat-subject', class='x-layout-inactive-content'>
+  <div id='chat-subject-toolbar'>
+  </div>
+  <div id='chat-subject-object'>
+    <div style="line-height: 280px; text-align: center;">
+      <%= image_tag "/images/logo.png" %>
+    </div>
+  </div>
+</div>
+
+<div id="chat-screen", class='x-layout-inactive-content'>
+  <table id="chat-data">
+    <tbody id="chat-data-tbody">
+    </tbody>
+  </table>
+</div>
+
+<div id="chat-input-area", class='x-layout-inactive-content'>
+  <div id="chat-input-textarea", class='x-layout-inactive-content'>
+    <% form_remote_tag(
+      :html => { :id => "chat-input-form" },
+      :url => { :action => 'send_chat_message', :id => @chatroom.id },
+      :loading => "Form.disable('chat-input-form')",
+      :complete => "$('chat-input').value='';Form.enable('chat-input-form');$('chat-input').focus()") do %>
+      <div>
+        <%= text_area_tag "chat-input", "" %>
+	<input type="submit" id="chat-input-submit" value="<%= _ "Send" %>" style="display:none;">
+      </div>
+    <% end %>
+  </div>
+  <div id="chat-input-userinfo", class='x-layout-inactive-content'>
+    <%= image_tag @me.photo_path, :id => "chat-input-userinfo-photo", :style => "width:95%;height:95%;margin:1px auto 0 auto;" %>
+  </div>
+</div>
+
+<%= render :partial => "change_user_photo_dlg" %>
+
+<%= chatroom_to_json = {
+  :id => @chatroom.id,
+  :subject => @chatroom.subject,
+  :sketch  => @chatroom.sketch,
+  :channel => "#{@subject_prefix}.#{@chatroom.id}",
+  :owner => user_to_hash(@chatroom.owner),
+  :users => @chatroom.users.map { |u| user_to_hash(u) }
+}.to_json %>
+
+<script type="text/javascript">
+Ext.onReady( function() {
+    Chatroom.init(<%= "#{chatroom_to_json}" %>, <%= "#{user_to_json(@me)}" %>);
+    Chatroom.connect();
+});
+
+YAHOO.util.Event.onAvailable(
+    "chat-input-userinfo-photo",
+    Chatroom.initChangeUserPhotoHandler,
+    Chatroom,
+    true
+)
+</script>

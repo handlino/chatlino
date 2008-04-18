@@ -1,0 +1,50 @@
+<h2><%= _"Update Your Account Settings" %></h2>
+<% form_tag :action=>:settings do %>
+
+  <div class="s-form">
+
+    <div id="error-msg">
+        <% @error_msg ||= "" %>
+        <%=_ @error_msg %>
+    </div>
+
+    <h3><%= _"Basic Settings" %></h3>
+    
+    <label for="user_email"><%= _"Your E-Mail:" %></label>
+  	<%= text_field 'user', 'email', :disabled => true %>
+  	<span class="description"><%= _"If you want to change your password, please contact the staff." %></span>
+  	<br><br>
+
+    <label for="user_user_name"><%= _"Your full name:" %></label>
+  	<%= text_field 'user', 'user_name' %>
+  	<br>
+
+    <label for="user_nickname"><%= _"Your nickname" %></label>  	
+  	<%= text_field 'user', 'nickname' %>
+  	<span class="description">
+        <%= _"You can set up a nickname to identify yourself. Nickname can be anything, but must be unique." %>
+  	<br><br>
+  	
+  	<label for="user_photo_path"><%= _"Buddy icon:" %></label>
+  	<%= text_field 'user', 'photo_path' %>
+  	<span class="description"><%= _"Set up a photo URL." %></span>
+  	<br>
+  	
+  	<h3><%= _"Change Password" %></h3>
+  	
+    <label for="old_password"><%= _"Old password" %></label>
+  	<%= password_field_tag 'old_password', '', :autocomplete => 'off', :size => 30 %>
+  	<br>
+  	
+    <label for="user_password"><%= _"New password" %></label>
+  	<%= password_field "user", "password", :autocomplete => 'off' %>
+  	<br>
+
+    <label for="user_password_confirmation"><%= _"Comfirm" %></label>
+    <%= password_field "user", 'password_confirmation', :autocomplete => 'off' %>
+  	<br>
+
+  	<%= submit_tag (_"Update"), { :class => "submit" } %>
+
+  </div>
+<% end %>

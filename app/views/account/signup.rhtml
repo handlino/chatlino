@@ -1,0 +1,32 @@
+<h2><%= _"Sign Up as an YHD User" %></h2>
+
+<% form_tag :action=>:signup, :id=>@invitation_code do %>
+  <div class="s-form">
+
+    <div id="error-msg">
+      <% @error_msg ||= "" %>
+      <%= _ @error_msg %>
+    </div>
+
+    <label for="user_email"><%= _"Your E-Mail:" %></label>
+    <%= text_field "user", "email" %>
+    <span class="description"><%= _"Your e-mail will be your login name" %></span>
+    <br>
+  	
+    <label for="user_password"><%= _"Password:" %></label>
+    <%= password_field "user", "password" %>
+    <br>
+
+    <label for="user_password_confirmation"><%= _"Comfirm Password:" %></label>
+    <%= password_field "user", "password_confirmation" %>
+    <br>
+
+    <div class="terms">
+      <%= check_box 'user', 'agree_term', {}, 'y', 'n' %>
+      <%= _"I agree to the terms and conditions.") %>
+    </div>
+
+    <%= submit_tag (_"Sign Up"), { :class => "submit" } %>
+
+  </div>
+<% end %>

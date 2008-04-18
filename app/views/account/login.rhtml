@@ -1,0 +1,28 @@
+<h2><%= _"Please login" %></h2>
+<% form_tag :action => :login do %>
+  <div class="s-form">
+    <div id="error-msg">
+      <%  @error_msg ||= "" %>
+      <%= _ @error_msg %>
+    </div>
+
+    <label for="user_email"><%= _"Your EMail:" %></label>
+    <%= text_field_tag :name, :email %>
+    <br>
+	
+  	
+    <label for="user_password"><%= _"Password:" %></label>
+    <%= password_field :user, :password %>
+    <br>
+    
+    <%= submit_tag _("Login"), :class => "submit" %>
+
+    <div class="rememberme-holder">
+      <%= check_box_tag "user_save_cookie", "y", false, { "tabindex" => 3 } %>
+      <%= check_box_tag "user_save_cookie", "y", "false", { "tabindex" => 3 } %>
+      <%= _("Remember me") %>
+    </div>
+    <p><%= _("Not a user?") + " " + link_to((_"Sign up here."), :action=>:signup) %></p>
+
+  </div>
+<% end %>

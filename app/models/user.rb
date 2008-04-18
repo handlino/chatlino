@@ -1,3 +1,24 @@
+# == Schema Information
+# Schema version: 3
+#
+# Table name: user
+#
+#  id              :integer(11)     not null, primary key
+#  nickname        :string(45)      default(""), not null
+#  user_name       :string(45)      default(""), not null
+#  password        :string(45)      default(""), not null
+#  email           :string(100)     
+#  create_date     :datetime        
+#  agree_term      :string(1)       
+#  suspend         :string(1)       
+#  country_id      :string(2)       
+#  last_login      :datetime        
+#  photo_path      :string(128)     default("/images/buddyicon.jpg")
+#  openid_url      :string(255)     
+#  email_confirmed :boolean(1)      
+#  last_seen       :datetime        
+#
+
 require "digest/sha1"
 
 class User < ActiveRecord::Base
@@ -94,6 +115,9 @@ class User < ActiveRecord::Base
 
   def change_password(password)
     self.password = self.class.sha(password)
+  end
+
+  def password_confirmation
   end
 
   protected

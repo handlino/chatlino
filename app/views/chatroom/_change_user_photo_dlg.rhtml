@@ -1,0 +1,22 @@
+<div id="change-user-photo-dlg-wrapper", class="x-layout-inactive-content">
+  <div id="change-user-photo-dlg-background"></div>
+  <div id="change-user-photo-dlg-content-wrapper">
+    <div id="change-user-photo-dlg-content">
+      <% form_remote_tag( :url => { :action => 'change_user_photo' },
+      :complete => "Chatroom.lightbox.hide();") do %>
+        <div>
+          <h2><%= (_"Change Your Photo Path") %></h2>
+          <%= image_tag @me.photo_path, { :class => 'user-photo' } %>
+          <br>
+
+          <label>URL: </label>
+          <%= text_field_tag "user-photo", @me.photo_path, { :size => "40" } %>
+          <br>
+
+	  <% submit_tag _"Set" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
