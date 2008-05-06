@@ -10,7 +10,7 @@
 
     <body id="<%= controller.controller_name %>">
         <%= render :partial => "common/header" %>
-        <div id="<%= yullio_page_width %>" class="<%= yullio_column_template %>">
+        <div id="content-main">
             <!-- #bd {{{ -->
             <div id="bd">
                 <% if controller.controller_name == ('target' || 'dashboard') %>
@@ -30,13 +30,6 @@
                 </div>
                 <!-- END: #yui-main }}} -->
 
-                <!-- .yui-b {{{ -->
-                <% if yullio_column_template != 'yui-t7' %>
-                <div class="yui-b">
-                    <%= render :partial => "sidebar"%>
-                </div>
-                <% end %>
-                <!-- END: .yui-b }}} -->
             </div>
             <!-- END: #bd }}} -->
             <%= render :partial => "common/footer" %>

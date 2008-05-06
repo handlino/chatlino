@@ -1,5 +1,4 @@
 class ChatroomController < ApplicationController
-  yullio_column_template :yui_t6
 
   before_filter :require_login
   before_filter :check_push_solution
