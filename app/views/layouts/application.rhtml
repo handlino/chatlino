@@ -13,9 +13,6 @@
         <div id="content-main">
             <!-- #bd {{{ -->
             <div id="bd">
-                <% if controller.controller_name == ('target' || 'dashboard') %>
-                    <%= render :partial => "top" %>
-                <% end %>
                  <div id="message">
                    <%= @message %>
                    <% if flash[:notice] %><div class="flash_notice"><p><%= flash[:notice] %></p></div><% end %>

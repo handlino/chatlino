@@ -3,18 +3,23 @@ body {
     padding: 0;
 }
 
-.container {
-    width: 1030px;
-    min-height: 700px;
-    margin-bottom: 0;
-    padding-bottom: 0;
+#container-background-right {
+    margin: 0 auto;
+    width: 1000px;
+    background: url(../../images/right-wrap.png) top right repeat-y;
 }
 
-#left-wrap {
-    width: 120px;
-    background: url(../../images/left-wrap.png) top repeat;
+.container {
+    width: 760px;
+    padding-left: 120px;
+    padding-right: 0;
     min-height: 700px;
     margin: 0;
+    background: url(../../images/left-wrap.png) left top repeat-y;
+}
+
+.chatlino.container:after {
+    content: "";
 }
 
 #center-wrap {
@@ -22,14 +27,6 @@ body {
     margin: 0;
     width: 760px;
     background: #2fcc24;
-}
-
-#right-wrap {
-    width: 120px;
-    background: url(../../images/right-wrap.png) top repeat;
-    min-height: 700px;
-    margin: 0;
-    padding: 0;
 }
 
 #hd {
@@ -61,3 +58,9 @@ body {
     background: url(../../images/ft.png) top left no-repeat;
     min-height: 200px;
 }
+
+#bd .inner {
+    width: 600px;
+    margin: 0 auto;
+}
+
