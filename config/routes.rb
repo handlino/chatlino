@@ -11,11 +11,7 @@ ActionController::Routing::Routes.draw do |map|
 
   # You can have the root of your site routed by hooking up ''
   # -- just remember to delete public/index.html.
-  map.connect '', :controller => "chatroom", :action => "index"
-
-  # Allow downloading Web Service WSDL as a file with an extension
-  # instead of a file named 'wsdl'
-  map.connect ':controller/service.wsdl', :action => 'wsdl'
+  map.root :controller => "chatroom", :action => "index"
 
   # Install the default route as the lowest priority.
   map.connect ':controller/:action/:id.:format'
