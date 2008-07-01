@@ -257,10 +257,7 @@ Chatroom.prototype = {
     lightbox: null,
     changeUserPhoto: function() {
         var html = $("change-user-photo-dlg-content").innerHTML;
-        var tabs = this.dialog.getTabs();
-        tabs.activate('change-user-photo-tab');
-
-        this.dialog.show();
+        alert("no dialog variable.");
     },
 
     saveChatlog: function() {
@@ -280,12 +277,10 @@ Chatroom.prototype = {
     },
 
     showDialog: function() {
-        this.dialog.show();
+        alert("no dialog variable.");
     },
     showHelpDialog: function(tab) {
-        var tabs = this.dialog.getTabs();
-        tabs.activate(tab || 'chatroom-help-tab');
-        this.dialog.show();
+        alert("no dialog variable.");
     },
     fitImage: function(url, bound) {
         var i = new Image()
