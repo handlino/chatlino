@@ -1,0 +1,21 @@
+development:
+  adapter: mysql
+  database: chatlino_development
+  username: root
+  password:
+  socket: /tmp/mysqld.sock
+
+test:
+  adapter: mysql
+  database: chatlino_test
+  username: root
+  password:
+  socket: /tmp/mysql.sock
+
+production:
+  adapter: mysql
+  database: chatlino_production
+  username: root
+  password: 
+  socket: /tmp/mysql.sock
+
