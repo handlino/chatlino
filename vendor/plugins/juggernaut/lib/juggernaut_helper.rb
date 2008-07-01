@@ -11,7 +11,7 @@ module Juggernaut # :nodoc:
       channels = channels.map { |c| CGI.escape(c.to_s) }.to_json
       content = content_tag :div, '', :id=>'flashcontent'
       content += javascript_tag %{Juggernaut.debug = true;} if Juggernaut::CONFIG["LOG_ALERT"] == 1
-      content += javascript_tag %{Juggernaut.listenToChannels({ host: '#{host}', num_tries: #{num_tries}, ses_id: '#{session.session_id}', num_secs: #{num_secs}, unique_id: '#{unique_id}', base64: #{base64}, port: #{port}, channels: #{channels}});}
+      content += javascript_tag %{Juggernaut.listenToChannels({ host: '#{host}', num_tries: #{num_tries}, ses_id: '#{session.session_id.to_json}', num_secs: #{num_secs}, unique_id: '#{unique_id}', base64: #{base64}, port: #{port}, channels: #{channels}});}
       content
     end
     
