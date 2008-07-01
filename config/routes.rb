@@ -15,10 +15,7 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.resource :session
 
-  map.resources :chatrooms
- 
-  map.connect '/chat/:action/:id', :controller => "chat"
-  
+  map.resources :chatrooms  
   map.with_options :controller => 'chatrooms' do |m|
     m.chatroom_say '/chatrooms/:id/say', :action => "say"
     m.chatroom_join '/chatrooms/:id/join', :action => "join"
@@ -27,8 +24,6 @@ ActionController::Routing::Routes.draw do |map|
     m.chatroom_change_subject '/chatrooms/:id/change_subject', :action => "change_subject"
   end
 
-  map.connect '/chatroom/:action/:id', :controller => "chatroom"
-  
   # Sample of regular route:
   # map.connect 'products/:id', :controller => 'catalog', :action => 'view'
   # Keep in mind you can assign values other than :controller and :action
@@ -49,7 +44,7 @@ ActionController::Routing::Routes.draw do |map|
   
   # You can have the root of your site routed by hooking up ''
   # -- just remember to delete public/index.html.
-  map.root :controller => "chatroom", :action => "index"
+  map.root :controller => "chatrooms"
 
   # Install the default route as the lowest priority.
   #map.connect ':controller/:action/:id.:format'

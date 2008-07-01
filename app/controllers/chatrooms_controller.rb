@@ -1,13 +1,20 @@
 class ChatroomsController < ApplicationController
   
   before_filter :login_required
- 
+  before_filter :require_chatroom_owner, :only => [:edit,:update,:destroy]
+
   include ChatSystem
 
   def index
     @chatrooms = Chatroom.find(:all)
-    render :layout => "application"
   end
+  
+  def show
+    @subject_prefix = "chat"
+    @chatroom = Chatroom.find(params[:id])
+    render :layout => 'chatroom'
+  end
+  
   def new
     @chatroom = Chatroom.new
   end
@@ -15,7 +22,9 @@ class ChatroomsController < ApplicationController
   def create
     @chatroom = Chatroom.new(params[:chatroom])
     @chatroom.owner = current_user
+    
     if @chatroom.save
+      flash[:notice] = _("New Chatroom Is Created.")
       redirect_to chatrooms_path
     else
       render :action => "new"
@@ -40,6 +49,7 @@ class ChatroomsController < ApplicationController
     if @chatroom.owner == current_user
       @chatroom.destroy
     end
+    flash[:notice] = _("The chatroom is deleted.")
     redirect_to chatrooms_path
   end
   

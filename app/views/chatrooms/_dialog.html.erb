@@ -43,10 +43,7 @@
 
     <div id='change-user-photo-tab' title=<%= _("My Photo") %> >
       <div class="inner-tab">
-        <% form_remote_tag(
-          :url => { :action => 'change_user_photo' },
-          :complete => "Chatroom.dialog.hide();") do %>
-
+    
           <div id="change-user-photo-dlg-content">
             <div>
               <h2><%= (_"Change Your Photo Path") %><h2>
@@ -56,12 +53,10 @@
 	      <label>URL: <label>
            
               <br>
-
-	      <%= submit_tag _"Set" %>
+  
             </div>
           </div>
 
-        <% end %>
       </div>
     </div>
 
