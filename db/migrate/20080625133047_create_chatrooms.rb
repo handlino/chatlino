@@ -5,7 +5,6 @@ class CreateChatrooms < ActiveRecord::Migration
       t.column :description, :string
       t.column :user_id, :integer
       t.column :subject, :text
-      t.column :sketch, :text
       t.column :updated_at, :datetime
       t.column :created_at, :datetime
     end

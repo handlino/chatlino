@@ -48,21 +48,6 @@ Chatroom.prototype = {
         } catch(e) {
         }
     },
-    sketch: function(cmd) {
-        if(cmd) {
-            this.info.sketch = cmd;
-        }
-        var td = $("TargetDiagram");
-        if (td) {
-            this.Event.append("[INFO] Chart loading... " + td.PercentLoaded() + "%");
-            if ( td.PercentLoaded() != 100 ) {
-                return;
-            } else {
-                td.setCommand(this.info.sketch);
-                this.Event.append("[INFO] Chart sketch updated");
-            }
-        }
-    },
     nick: function(message, me) {
     },
     make_chat_message: function(message_class, message, me) {
@@ -189,8 +174,7 @@ Chatroom.prototype = {
         chatMenu.render();
     },
     refreshUserInfo: function() {
-        new Ajax.Request('/chatroom/refresh_user_info', {
-            parameters: { id: this.info.id },
+        new Ajax.Request('/chatroom/' + this.info.id + '/refresh_info', {
             onComplete: function() {
                 Chatroom.redrawUserList()
                 Chatroom.redrawMyIcon()
@@ -270,7 +254,7 @@ Chatroom.prototype = {
         }
     },
     ping: function() {
-        new Ajax.Request("/chatroom/ping/" + Chatroom.info.id )
+        new Ajax.Request("/chatrooms/" + Chatroom.info.id + "/ping")
     }
 }
 
@@ -285,10 +269,7 @@ if ( typeof String.prototype.trim == 'undefined' ) {
 // Juggernaut Overrides
 
 $(document).observe("juggernaut:connected", function () {
-    new Ajax.Request('/chatroom/send_join', {
-        parameters: {
-            id: Chatroom.info.id
-        },
+    new Ajax.Request('/chatrooms/' + Chatroom.info.id + '/join', {
         asynchronous: true,
         evalScripts:true
     });
@@ -299,10 +280,7 @@ $(document).observe("juggernaut:connected", function () {
 
 window.onunload =  function() {
     if (Chatroom.info) {
-        new Ajax.Request(
-            "/chatroom/leave/",
-            {
-                parameters: { id: Chatroom.info.id },
+        new Ajax.Request('/chatrooms/' + Chatroom.info.id + '/leave', {                
                 asynchronous: false
             });
     }

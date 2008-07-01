@@ -2,6 +2,8 @@ class ChatroomsController < ApplicationController
   
   before_filter :login_required
   
+  include ChatSystem
+  
   def new
     
   end

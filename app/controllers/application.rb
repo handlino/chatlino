@@ -1,38 +1,36 @@
-require 'juggernaut'
-require 'juggernaut_helper'
-
 class ApplicationController < ActionController::Base
- 
+
   helper :all # include all helpers, all the time
   include AuthenticatedSystem
-  
+
   include ApplicationHelper
   include ActionView::Helpers::JavaScriptHelper
   include ActionView::Helpers::AssetTagHelper
-  
+
   before_filter :check_lang
   before_filter :add_stylesheets
   before_filter :add_javascripts
- 
+
   def initialize
     @stylesheets = []
     @javascripts = []
   end
 
   protected
-    def check_lang
-      if !cookies[:lang]
-        cookies[:lang] = 'zh_TW'
-      end
-
-      logger.info "Current lang = #{cookies[:lang]}"
-
-      if params[:lang]
-        @lang = cookies[:lang] = params[:lang]
-      else
-        @lang = cookies[:lang]
-      end
+  
+  def check_lang
+    if !cookies[:lang]
+      cookies[:lang] = 'zh_TW'
     end
+
+    logger.info "Current lang = #{cookies[:lang]}"
+
+    if params[:lang]
+      @lang = cookies[:lang] = params[:lang]
+    else
+      @lang = cookies[:lang]
+    end
+  end
 
   def add_stylesheets
     ["#{controller_name}/_controller", "#{controller_name}/#{action_name}"].each do |stylesheet|

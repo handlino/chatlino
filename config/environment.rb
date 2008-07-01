@@ -48,7 +48,6 @@ Rails::Initializer.run do |config|
   
   # See Rails::Configuration for more options
   
-  #config.gem "juggernaut",  :version => '>=0.5.4'
 end
 
 # Include your application configuration below

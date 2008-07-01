@@ -69,13 +69,12 @@
     <div id="chatroom-topic-tab" title=<%= _("Topic") %> >
       <div class="inner-tab">
         <% form_remote_tag(
-          :url => { :action => 'send_chat_subject' },
+          :url => chatroom_change_subject_path( :id => @chatroom.id ),
           :complete => "Chatroom.dialog.hide();") do %>
 
           <div id="change-topic-dlg-content">
             <div>
               <h2><%= _"Change Chatroom Topic" %></h2>
-              <%= hidden_field "chatroom", "id" %>
               <%= text_area "chatroom", "subject", :size => "40x10" %>
               <p>Paste HTML please</p>
               <br>

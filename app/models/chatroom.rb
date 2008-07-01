@@ -7,8 +7,7 @@
 #  title       :string(255)     
 #  description :string(255)     
 #  user_id     :integer(11)     
-#  subject     :text            
-#  sketch      :text            
+#  subject     :text           
 #  updated_at  :datetime        
 #  created_at  :datetime        
 #
