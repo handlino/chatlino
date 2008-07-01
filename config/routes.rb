@@ -25,7 +25,6 @@ ActionController::Routing::Routes.draw do |map|
     m.chatroom_leave '/chatrooms:/id/leave', :action => "leave"
     m.chatroom_refresh_info '/chatrooms/:id/refresh_info', :action => "refresh_info"
     m.chatroom_change_subject '/chatrooms/:id/change_subject', :action => "change_subject"
-    m.chatroom_ping '/chatrooms/:id/ping', :action => "ping"
   end
 
   map.connect '/chatroom/:action/:id', :controller => "chatroom"

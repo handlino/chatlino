@@ -1,9 +1,8 @@
 <% if @chatroom %>
   <div id="chatroom-userlist">
     <% @chatroom.users.each do |u| %>
-      <div class="item" id="chatroom-userlist-user<%= u.id %>" >
-        <%= #image_tag u.photo_path, :size => "24x24" 
-        %>
+      <div class="item" id="chatroom-userlist-user<%= u.id %>">
+        <%= buddy_icon(u, :small) %>
         <span><%= user_shortname_with_link(u) %></span>
       </div>
     <% end %>

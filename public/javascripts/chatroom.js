@@ -252,9 +252,6 @@ Chatroom.prototype = {
 
         userLeave: function() {
         }
-    },
-    ping: function() {
-        new Ajax.Request("/chatrooms/" + Chatroom.info.id + "/ping")
     }
 }
 

@@ -8,7 +8,7 @@
 <div class="chatroom-description">
   <% if c.owner %>
   <div class="avatar">
-    <%= #link_to image_tag(c.owner.photo_path), { :action => 'show', :id => c.id }, :size  => "48x48", :target => "chatroom-window-#{c.id}" 
+    <%= link_to buddy_icon(c.owner), { :action => 'show', :id => c.id }, :size  => "48x48", :target => "chatroom-window-#{c.id}" 
     %>
   </div>
   <% end %>

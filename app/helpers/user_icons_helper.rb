@@ -1,5 +1,10 @@
 module UserIconsHelper
+  
   def buddy_icon(user,size = nil )
+    return image_tag( buddy_icon_path(user,size), :class => "photo" )
+  end
+
+  def buddy_icon_path(user,size=nil)
     #check size  
     if size == :small
       grav_size = 32
@@ -15,10 +20,10 @@ module UserIconsHelper
       else # user doesnt upload icon   
         src = gravatar_url(user.email, grav_size)
       end
-  
-    return image_tag(src,:class => "photo" )
+      
+    return src
   end
-
+  
   def gravatar_url(email,grav_size)
       grav_url = "http://www.gravatar.com/avatar.php?gravatar_id=" + Digest::MD5.hexdigest(email.downcase) + "&amp;size=#{grav_size}"
       return grav_url
