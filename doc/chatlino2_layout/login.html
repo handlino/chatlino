@@ -7,18 +7,40 @@
         <link rel="stylesheet" href="public/stylesheets/chatlino/main.css" type="text/css">
     </head>
     <body>
-        <div class="chatlino container">
-            <div id="left-wrap" class="span-1">&nbsp;</div>
+        <div id="container-background-right">
 
-            <div id="center-wrap" class="span-1">
+        <div id="container-background-left">
+            <div id="container" class="span-1">
                 <div id="hd" class="span-18 last">
-				    <div id="left-head" class="span-1">&nbsp;</div>
-				    <div id="right-head" class="span-1">&nbsp;</div>
+                    <div id="left-head" class="span-1">
+                        <img class="logo" src="public/images/logo.png">
+                        <img class="title" src="public/images/title-login.png">
+                    </div>
+                    <div id="right-head" class="span-1">&nbsp;</div>
                 </div>
-                <div id="bd">&nbsp;</div>
-                <div id="ft"></div>
+                <div id="bd">
+                    <div class="inner">
+			<form id="login">
+			    <p><label>OpenID</label><br>
+			    <input></p>
+
+			    <p class="eg">
+			    e.g.<br>
+			    Flickr: http://www.flickr.com/photos/yourname<br>
+			    Blogger: http://yourblog.blogspot.com<br>
+			    ClaimID: http://claimid.com/yourname<br>
+			    </p>
+
+			    <input type="submit">
+			</form>
+                    <!-- this nbsp is required to prevent showing an empty green line. -->
+                    &nbsp;
+                    </div>
+                </div>
+                <div id="ft">&nbsp;</div>
             </div>
-            <div id="right-wrap" class="span-1">&nbsp;</div>
+        </div>
+        
         </div>
     </body>
 </html>

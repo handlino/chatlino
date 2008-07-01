@@ -9,7 +9,7 @@ body {
     background: url(../../images/right-wrap.png) top right repeat-y;
 }
 
-.container {
+#container-background-left {
     width: 760px;
     padding-left: 120px;
     padding-right: 0;
@@ -18,15 +18,25 @@ body {
     background: url(../../images/left-wrap.png) left top repeat-y;
 }
 
-.chatlino.container:after {
-    content: "";
+img.logo {
+    margin-top: 50px;
+    margin-left: 20px;
 }
 
-#center-wrap {
+img.title {
+    margin-top: 50px;
+    margin-left: 70px;
+}
+
+#container {
     padding: 0;
     margin: 0;
     width: 760px;
     background: #2fcc24;
+}
+
+#container-background-left:after {
+    content: "";
 }
 
 #hd {
@@ -56,7 +66,7 @@ body {
 
 #ft {
     background: url(../../images/ft.png) top left no-repeat;
-    min-height: 200px;
+    height: 200px;
 }
 
 #bd .inner {
@@ -64,3 +74,27 @@ body {
     margin: 0 auto;
 }
 
+#policy {
+    margin-left: 120px;
+    margin-top: 90px;
+}
+
+#policy .link,
+#policy a {
+    color: #fff;
+}
+
+p.eg {
+    color: #888;
+}
+
+form#login label {
+    color: #2ecc24;
+    font-size: 18px;
+}
+
+form#login input {
+    border: 1px solid #2ecc24;
+    font-size: 20px;
+    background: #ddd;
+}
