@@ -13,6 +13,10 @@ class UsersController < ApplicationController
     @user_openids = @user.openids
   end
 
+  def show
+    @user = User.find(currend_user.id)
+    @user_openids = @user.openids
+  end
   def update
     @user = current_user
     @user_openids = @user.openids

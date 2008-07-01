@@ -1,3 +1,6 @@
+require 'juggernaut'
+require 'juggernaut_helper'
+
 class ApplicationController < ActionController::Base
  
   helper :all # include all helpers, all the time

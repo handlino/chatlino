@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   include Authentication::ByCookieToken
 
   has_many :openids, :class_name => "UserOpenid", :dependent => :destroy
-
+  has_one :buddy_icon, :dependent => :destroy
   before_validation_on_create :make_user_openid
 
   validates_presence_of     :login
