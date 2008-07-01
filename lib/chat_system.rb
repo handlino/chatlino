@@ -10,20 +10,32 @@ module ChatSystem
   end
 
   def join
-    @chatroom.users.push(current_user) if !@chatroom.users.include?(current_user)
+    @chatroom.users.push(current_user) unless @chatroom.users.include?(current_user)
     send_push_data("Chatroom.join(#{user_to_json(current_user)});")
+    render :nothing => true
   end
 
   def leave
     @chatroom.users.delete(current_user)
     send_push_data("Chatroom.leave(#{user_to_json(current_user)});")
-
+    
     msg = _("You left the room. This window are not closed automatically. You are able to see previous conversation logs, but not sending new chat messages.")
 
     render :update do |page|
       page << "Chatroom.Event.append(#{msg.to_json})"
     end
   end
+
+  #def disconnect
+  #  logger.debug( request.host_with_port )
+  #  if request.host_with_port == '127.0.0.1'
+  #    logger.debug( params[:session_id] )
+  #    user = User.find_by_login( params[:client_id] )
+  #    ChatroomUser.delete_all( ["user_id = ?", user.id] )
+  #    Juggernaut.send_to_all("Chatroom.leave(#{user_to_json(user)});")
+  #  end
+  #  render :nothing => true
+  #end
 
   def refresh_info
     chatroom_hash = {
@@ -58,6 +70,7 @@ module ChatSystem
 
     if cmd.blank?
       send_push_data "Chatroom.say(#{input_data(msg)}, #{user_to_json(current_user)});"
+      render :nothing => true
     elsif VALID_COMMAND.include?(cmd)
       self.send( "cmd_#{cmd}", msg)
     else
@@ -71,6 +84,7 @@ module ChatSystem
 
   def cmd_me(msg)
     send_push_data("Chatroom.act(#{input_data(msg)}, #{user_to_json(current_user)});");
+    render :nothing => true
   end
 
   def cmd_nick(msg)
@@ -92,6 +106,7 @@ module ChatSystem
       return
     end
     send_push_data(data)
+    render :nothing => true
   end
 
   def cmd_set(msg)
@@ -123,6 +138,7 @@ module ChatSystem
       return
     end
     send_push_data(data)
+    render :nothing => true
   end
 
   def cmd_kick(msg)
@@ -139,6 +155,7 @@ module ChatSystem
         Chatroom.Event.append(#{event_msg.to_json});
         Chatroom.refreshUserInfo();
         ");
+        render :nothing => true
         return
       else
         msg = _("User not found")
@@ -150,7 +167,7 @@ module ChatSystem
     render :update do |page|
       page << "Chatroom.Event.append(#{msg.to_json})"
     end
-    
+
   end
 
   def cmd_exit(msg)
@@ -209,7 +226,6 @@ module ChatSystem
 
   def send_push_data(data)
     Juggernaut.send_to_channel(data, [ "chat.#{@chatroom.id}" ])
-    render :nothing => true
   end
 
   def find_chatroom

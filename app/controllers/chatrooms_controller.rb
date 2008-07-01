@@ -1,6 +1,6 @@
 class ChatroomsController < ApplicationController
   
-  before_filter :login_required
+  before_filter :login_required, :except => [:disconnect]
   before_filter :require_chatroom_owner, :only => [:edit,:update,:destroy]
 
   include ChatSystem

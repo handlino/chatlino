@@ -19,11 +19,13 @@ ActionController::Routing::Routes.draw do |map|
   map.with_options :controller => 'chatrooms' do |m|
     m.chatroom_say '/chatrooms/:id/say', :action => "say"
     m.chatroom_join '/chatrooms/:id/join', :action => "join"
-    m.chatroom_leave '/chatrooms:/id/leave', :action => "leave"
+    m.chatroom_leave '/chatrooms/:id/leave', :action => "leave" 
     m.chatroom_refresh_info '/chatrooms/:id/refresh_info', :action => "refresh_info"
     m.chatroom_change_subject '/chatrooms/:id/change_subject', :action => "change_subject"
+    #m.connect '/disconnect', :action => "disconnect"
   end
 
+  
   # Sample of regular route:
   # map.connect 'products/:id', :controller => 'catalog', :action => 'view'
   # Keep in mind you can assign values other than :controller and :action
