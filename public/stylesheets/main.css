@@ -1,1 +1,115 @@
+body {
+    margin: 0;
+    padding: 0;
+}
 
+#container-background-right {
+    margin: 0 auto;
+    width: 1000px;
+    background: url(../../images/right-wrap.png) top right repeat-y;
+}
+
+#container-background-left {
+    width: 760px;
+    padding-left: 120px;
+    padding-right: 0;
+    min-height: 700px;
+    margin: 0;
+    background: url(../../images/left-wrap.png) left top repeat-y;
+}
+
+.chatlino.container:after {
+    content: "";
+}
+
+img.logo {
+    margin-top: 50px;
+    margin-left: 20px;
+}
+
+img.title {
+    margin-top: 50px;
+    margin-left: 70px;
+}
+
+#container {
+    padding: 0;
+    margin: 0;
+    width: 760px;
+    background: #2fcc24;
+}
+
+#hd {
+    width: 780px;
+}
+
+#left-head, #right-head {
+    height: 270px;
+    margin: 0;
+    padding: 0;
+    width: 380px;
+}
+
+#left-head {
+    background: url(../../images/left-head.png) top left no-repeat;
+}
+
+#right-head {
+    background: url(../../images/right-head.png) top left no-repeat;
+}
+
+#bd {
+    background: url(../../images/bd.png) top left repeat;
+    min-height: 600px;
+}
+
+#ft {
+    background: url(../../images/ft.png) top left no-repeat;
+    height: 150px;
+}
+
+#bd .inner {
+    width: 600px;
+    margin: 0 auto;
+}
+
+#policy {
+    margin-left: 120px;
+    margin-top: 90px;
+    font-family: Arial;
+    font-size: 12px;
+}
+
+#policy .link,
+#policy a {
+    color: #fff;
+    text-decoration: none;
+}
+
+p.eg {
+    color: #888;
+}
+
+form#login label {
+    color: #2ecc24;
+    font-size: 18px;
+}
+
+input.login-openid {
+    border: 1px solid #2ecc24;
+    font-size: 20px;
+    background: #eee;
+}
+
+.room-name {
+    color: #2ecc24;
+    font-size: 24px;
+}
+
+.login-submit {
+    border: 0;
+    background: #ffa000;
+    color: #fff;
+    font-size: 14px;
+    padding: 7px 18px;
+}

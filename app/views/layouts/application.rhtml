@@ -1,30 +1,44 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
     <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Chatlino</title>
+	<%= stylesheet_link_tag "blueprint/screen.css" %>
         <%= stylesheet_link_tag *(['main'] + @stylesheets) %>
-        <%= javascript_include_tag :defaults %>
-        <%= javascript_include_tag *(@javascripts) %>
+        <%= javascript_include_tag :defaults, *(@javascripts) %>
     </head>
 
     <body id="<%= controller.controller_name %>">
-        <%= render :partial => "common/header" %>
-        <div id="content-main">
-            <!-- #bd {{{ -->
-            <div id="bd">
-                 <div id="message">
-                   <%= @message %>
-                   <% if flash[:notice] %><div class="flash_notice"><p><%= flash[:notice] %></p></div><% end %>
-                   <% if flash[:error] %><div class="flash_error"><p><%= flash[:error] %></p></div><% end %>
-                   <% if flash[:form_error] %>
-		       <div class="flash_form_error"><p><%= flash[:form_error] %></p></div>
-		   <% end %>
-                 </div>
-                 <%= yield %>
 
+        <div id="container-background-right">
+        <div id="container-background-left" class="chatlino container">
+            <div id="container" class="span-1">
+
+                <div id="hd" class="span-18 last">
+                    <div id="left-head" class="span-1">
+			<%= image_tag "logo.png", :class => "logo" %>
+			<%= image_tag "title-login.png", :class => "title" %>
+                    </div>
+                    <div id="right-head" class="span-1">&nbsp;</div>
+                </div>
+
+		<div id="bd">
+		    <div class="inner">
+			<div id="message">
+			   <%= @message %>
+			   <% if flash[:notice] %><div class="flash_notice"><p><%= flash[:notice] %></p></div><% end %>
+			   <% if flash[:error] %><div class="flash_error"><p><%= flash[:error] %></p></div><% end %>
+			   <% if flash[:form_error] %><div class="flash_form_error"><p><%= flash[:form_error] %></p></div><% end %>
+			</div>
+
+			<%= yield %>
+		    </div>
+		</div>
+
+		<%= render :partial => "common/footer" %>
             </div>
-            <%= render :partial => "common/footer" %>
+        </div><!-- containter background left end -->
+        
         </div>
     </body>
 </html>
