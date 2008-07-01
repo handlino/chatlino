@@ -19,7 +19,7 @@ DEFAULT_CHANNELS:
 #Flash's xmlsocket can only connect to addresses in the same domain
 #or subdomain. For example, if people access your app from www.test.com than this
 #should be "test". Omit the port number and the 'http://'.
-PUSH_HELPER_HOST: "jail1.ccca.nctu.edu.tw"
+PUSH_HELPER_HOST: "localhost"
 
 #This is a 'secret' send by the broadcaster to validate identity.
 SECRET: "2987v9ckq28zkc8vjne38fkdj"
