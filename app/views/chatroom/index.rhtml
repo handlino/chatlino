@@ -9,7 +9,7 @@
 <div class="chatroom-description">
   <% if c.owner %>
   <div class="avatar">
-    <%= link_to_image c.owner.photo_path, { :action => 'show', :id => c.id }, :style => "float:left;", :size  => "48x48", :target => "chatroom-window-#{c.id}" %>
+    <%= link_to_image c.owner.photo_path, { :action => 'show', :id => c.id }, :size  => "48x48", :target => "chatroom-window-#{c.id}" %>
   </div>
   <% end %>
 
@@ -23,7 +23,6 @@
   <div class="join">
     <%= link_to '<img src="/images/chatroom/chatroom_join.gif" width="50" height="40">', {:action => "show", :id => c.id}, :target => "chatroom-window-#{c.id}" %>
   </div>
-  <div style="clear:both;">&nbsp;</div>
 </div>
 <% end %>
 

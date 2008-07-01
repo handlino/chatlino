@@ -12,7 +12,6 @@
         <% if c.owner %>
           <%= link_to_image c.owner.photo_path,
                         { :action => 'show', :id => c.id },
-                        :style => "float:left;",
                         :size  => "48x48",
                         :target => "chatroom-window-#{c.id}" %>
         <% end %>
@@ -29,7 +28,6 @@
             :target => "chatroom-window-#{c.id}" %>
         </div>
 
-        <div style="clear:both;"></div>
       </div>
     <% end %>
   </div>

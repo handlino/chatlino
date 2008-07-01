@@ -11,7 +11,7 @@
   <div id='chat-subject-toolbar'>
   </div>
   <div id='chat-subject-object'>
-    <div style="line-height: 280px; text-align: center;">
+    <div>
       <%= image_tag "/images/logo.png" %>
     </div>
   </div>
@@ -33,12 +33,12 @@
       :complete => "$('chat-input').value='';Form.enable('chat-input-form');$('chat-input').focus()") do %>
       <div>
         <%= text_area_tag "chat-input", "" %>
-	<input type="submit" id="chat-input-submit" value="<%= _ "Send" %>" style="display:none;">
+	<input type="submit" id="chat-input-submit" value="<%= _ "Send" %>">
       </div>
     <% end %>
   </div>
   <div id="chat-input-userinfo", class='x-layout-inactive-content'>
-    <%= image_tag @me.photo_path, :id => "chat-input-userinfo-photo", :style => "width:95%;height:95%;margin:1px auto 0 auto;" %>
+    <%= image_tag @me.photo_path, :id => "chat-input-userinfo-photo" %>
   </div>
 </div>
 
