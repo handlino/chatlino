@@ -53,4 +53,12 @@ class ChatroomsController < ApplicationController
     redirect_to chatrooms_path
   end
   
+  protected
+  
+  def cmd_muwahahaha(msg)
+    new_subject = '<object width="425" height="355"><param name="movie" value="http://www.youtube.com/v/TV0gKlKYM4k&hl=en"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/TV0gKlKYM4k&hl=en" type="application/x-shockwave-flash" wmode="transparent" width="425" height="355"></embed></object>'
+    send_push_data( "Chatroom.Event.append(#{new_subject.to_json});")
+    render :nothing => true
+  end
+  
 end

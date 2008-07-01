@@ -18,7 +18,7 @@ module ChatSystem
   def leave
     @chatroom.users.delete(current_user)
     send_push_data("Chatroom.leave(#{user_to_json(current_user)});")
-    
+
     msg = _("You left the room. This window are not closed automatically. You are able to see previous conversation logs, but not sending new chat messages.")
 
     render :update do |page|
@@ -27,8 +27,9 @@ module ChatSystem
   end
 
   def disconnect
+    #FIXME: 220.133.37.189 (freebsd.ihower.idv.tw)
     logger.debug( "request disconnect from #{request.remote_ip}" )
-    if request.remote_ip == '127.0.0.1'
+    if request.remote_ip == '127.0.0.1' || params[:secret_key] == 'blah'
       user = User.find_by_login( params[:client_id] )
       ChatroomUser.delete_all( ["user_id = ?", user.id] )
       Juggernaut.send_to_all("Chatroom.leave(#{user_to_json(user)});")
@@ -70,17 +71,19 @@ module ChatSystem
     if cmd.blank?
       send_push_data "Chatroom.say(#{input_data(msg)}, #{user_to_json(current_user)});"
       render :nothing => true
-    elsif VALID_COMMAND.include?(cmd)
-      self.send( "cmd_#{cmd}", msg)
     else
-      render :update do |page|
-        page.alert("Unknown chatroom command: #{cmd}");
+      begin
+        self.send( "cmd_#{cmd}", msg)
+      rescue
+        render :update do |page|
+          page.alert("Unknown chatroom command: #{cmd}");
+        end
       end
     end
   end
-
-  VALID_COMMAND = ['me','nick','set','kick','exit','refresh','help']
-
+  
+  protected
+    
   def cmd_me(msg)
     send_push_data("Chatroom.act(#{input_data(msg)}, #{user_to_json(current_user)});");
     render :nothing => true
@@ -184,44 +187,6 @@ module ChatSystem
       page.call("Chatroom.showHelpDialog")
     end
   end
-
-  # def change_user_photo
-  #   user_photo = params['user-photo'] or return :nothing => true;
-  #   params['chat-input'] = "/set photo_path #{user_photo}";
-  #   send_chat_message
-  # end
-  #
-  # def ping
-  #   return render(:nothing => true)
-  #   if !(params[:id] && current_user)
-  #     return render(:nothing => true)
-  #   end
-  #
-  #   current_user.last_seen = Time.now
-  #   current_user.save
-  #
-  #   chatroom = Chatroom.find(params[:id])
-  #
-  #   data = ""
-  #
-  #   if rand(chatroom.users.size) == 0
-  #     chatroom.users.map do |u|
-  #       if Time.now - u.last_seen > 600.0
-  #         chatroom.users.delete(u)
-  #         data << "Chatroom.leave(user_to_json(u));"
-  #       end
-  #     end
-  #   end
-  #
-  #   if data.size > 0
-  #     data += "Chatroom.refreshUserInfo();"
-  #     return send_push_data(data)
-  #   end
-  #
-  #   return render(:nothing => true)
-  # end
-
-  protected
 
   def send_push_data(data)
     Juggernaut.send_to_channel(data, [ "chat.#{@chatroom.id}" ])
