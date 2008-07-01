@@ -39,7 +39,7 @@
     <div id="container">
         <div id="nav">
             <ul>
-                <% class_name = ( @me.is_guest? ) ? "signin-link" : "" %>
+                <% class_name = ( logged_in? ) ? "" : "signin-link"%>
                 <li><%= link_to (_ "Home"), { :controller => "chatroom" }, :class => class_name %></li>
                 <li><%= link_to (_"Logout"), :controller=>'openid_account', :action=>'logout' %></li>
             </ul>

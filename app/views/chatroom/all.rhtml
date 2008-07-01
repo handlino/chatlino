@@ -4,7 +4,7 @@
       <div class='chatroom-title'>
 	<h3>
             <%= c.title %>
-	    <span class="chatroom-owner-idicator"><%= _ "My room" if c.owner == @me %></span>
+	    <span class="chatroom-owner-idicator"><%= _ "My room" if c.owner == current_user %></span>
         </h3>
       </div>
       <div class='chatroom-description'>

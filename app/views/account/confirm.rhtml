@@ -1,7 +1,0 @@
-<% if @success %>
-	<p><%= _"Your e-mail has been confirmed, thank you!" %></p>
-	
-	<p><%= link_to _("See my profile"), :controller => "user", :action => "show", :id => "me" %></p>
-<% else %>
-	<p><%= _"There is some problem with the confirmation code, please make sure it is the correct one." %></p>
-<% end %>

@@ -3,7 +3,7 @@
 <% @chatrooms.each do |c| %>
 <h3 class="chatroom-title">
   <%= c.title %>
-  <span class="chatroom-owner-indicator"><%= _("My room") if c.owner == @me %></span>
+  <span class="chatroom-owner-indicator"><%= _("My room") if c.owner == current_user %></span>
 </h3>
 
 <div class="chatroom-description">

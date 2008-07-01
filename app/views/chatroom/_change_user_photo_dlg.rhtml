@@ -6,11 +6,12 @@
       :complete => "Chatroom.lightbox.hide();") do %>
         <div>
           <h2><%= (_"Change Your Photo Path") %></h2>
-          <%= image_tag @me.photo_path, { :class => 'user-photo' } %>
+          <%= buddy_icon( current_user, :class => 'user-photo' ) %>
           <br>
 
           <label>URL: </label>
-          <%= text_field_tag "user-photo", @me.photo_path, { :size => "40" } %>
+          <%= #text_field_tag "user-photo", current_user.photo_path, { :size => "40" } 
+          %>
           <br>
 
 	  <% submit_tag _"Set" %>

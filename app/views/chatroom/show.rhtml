@@ -29,7 +29,7 @@
     <% end %>
   </div>
   <div id="chat-input-userinfo">
-    <%= image_tag @me.photo_path, :id => "chat-input-userinfo-photo" %>
+    <%= buddy_icon( current_user, :id => "chat-input-userinfo-photo" ) %>
   </div>
 </div>
 
@@ -46,7 +46,7 @@
 
 <script type="text/javascript">
 Event.observe(window, 'load', function() {
-        Chatroom.init(<%= "#{chatroom_to_json}" %>, <%= "#{user_to_json(@me)}" %>);
+        Chatroom.init(<%= "#{chatroom_to_json}" %>, <%= "#{user_to_json(current_user)}" %>);
         Chatroom.connect();
         Chatroom.initChangeUserPhotoHandler();
         Chatroom.focusOnInput();
