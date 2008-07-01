@@ -1,31 +1,22 @@
-# for yui-ext NestedLayoutPanel
-<div id="top" class="x-layout-inactive-content">
-    <div id="topmenu">
-    </div>
+<div id="top">
+    <div id="topmenu"></div>
 </div>
 
-<div id='content', class='x-layout-inactive-content'>
+<div id='content'></div>
+
+<div id='chat-subject'>
+  <div id='chat-subject-toolbar'></div>
+  <div id='chat-subject-object'><%= image_tag "/images/logo.png" %></div>
 </div>
 
-<div id='chat-subject', class='x-layout-inactive-content'>
-  <div id='chat-subject-toolbar'>
-  </div>
-  <div id='chat-subject-object'>
-    <div>
-      <%= image_tag "/images/logo.png" %>
-    </div>
-  </div>
-</div>
-
-<div id="chat-screen", class='x-layout-inactive-content'>
+<div id="chat-screen">
   <table id="chat-data">
-    <tbody id="chat-data-tbody">
-    </tbody>
+    <tbody id="chat-data-tbody"></tbody>
   </table>
 </div>
 
-<div id="chat-input-area", class='x-layout-inactive-content'>
-  <div id="chat-input-textarea", class='x-layout-inactive-content'>
+<div id="chat-input-area">
+  <div id="chat-input-textarea" style="background: #999; height:20px; width:20px; color: #555;">
     <% form_remote_tag(
       :html => { :id => "chat-input-form" },
       :url => { :action => 'send_chat_message', :id => @chatroom.id },
@@ -37,14 +28,14 @@
       </div>
     <% end %>
   </div>
-  <div id="chat-input-userinfo", class='x-layout-inactive-content'>
+  <div id="chat-input-userinfo">
     <%= image_tag @me.photo_path, :id => "chat-input-userinfo-photo" %>
   </div>
 </div>
 
 <%= render :partial => "change_user_photo_dlg" %>
 
-<%= chatroom_to_json = {
+<% chatroom_to_json = {
   :id => @chatroom.id,
   :subject => @chatroom.subject,
   :sketch  => @chatroom.sketch,
@@ -54,15 +45,11 @@
 }.to_json %>
 
 <script type="text/javascript">
-Ext.onReady( function() {
-    Chatroom.init(<%= "#{chatroom_to_json}" %>, <%= "#{user_to_json(@me)}" %>);
-    Chatroom.connect();
+Event.observe(window, 'load', function() {
+        Chatroom.init(<%= "#{chatroom_to_json}" %>, <%= "#{user_to_json(@me)}" %>);
+        Chatroom.connect();
+        Chatroom.initChangeUserPhotoHandler();
+        Chatroom.focusOnInput();
+        Chatroom.setKeyBinding();
 });
-
-YAHOO.util.Event.onAvailable(
-    "chat-input-userinfo-photo",
-    Chatroom.initChangeUserPhotoHandler,
-    Chatroom,
-    true
-)
 </script>

@@ -4,41 +4,34 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Chatlino</title>
     <%= stylesheet_link_tag *(['main'] + @stylesheets) %>
-    <%= javascript_include_tag *(["yui/utilities/utilities", "ext/ext-yui-adapter", "ext/ext-all"]) %>
     <%= javascript_include_tag :defaults %>
-    <%= javascript_include_tag "jsan/JSAN" %>
-    <%= javascript_include_tag "jsan/DOM/Ready" %>
-    <%= javascript_include_tag "jsan/DOM/Events" %>
-    <%= javascript_include_tag "jsan/Effect/RoundedCorners" %>
-    <%= javascript_include_tag "jsan/Asynapse/Emoticon" %>
-    <%= javascript_include_tag "jsan/Widget/Lightbox" %>
-    <%= javascript_include_tag "json" %>
+    <%= javascript_include_tag "jsan/JSAN", "jsan/DOM/Ready", "jsan/DOM/Events", "jsan/Effect/RoundedCorners"%>
+    <%= javascript_include_tag "jsan/Asynapse/Emoticon", "jsan/Widget/Lightbox", "json" %>
 
     <% if @push_solution == "ipush" %>
-      <%= javascript_include_tag "pjax/swfobject" %>
-      <%= javascript_include_tag "pjax/pjax" %>
-      <%= javascript_include_tag "ipush" %>
+        <%= javascript_include_tag "pjax/swfobject" %>
+        <%= javascript_include_tag "pjax/pjax" %>
+        <%= javascript_include_tag "ipush" %>
     <% end %>
 
     <%= javascript_include_tag "chatroom" %>
+
+    <script type="text/javascript">
+        Chatroom.PUSH_SOLUTION = <%= @push_solution.to_json %>
+    </script>
   </head>
 
   <body>
-
-    <script type="text/javascript">
-      Chatroom.PUSH_SOLUTION = <%= @push_solution.to_json %>
-    </script>
-
     <% if @push_solution == "ipush" %>
-      <script type="text/javascript">
-          var iplink = new iPush2Link();
-      </script>
+        <script type="text/javascript">
+            var iplink = new iPush2Link();
+        </script>
     <% elsif @push_solution == "juggernaut" %>
-      <%= listen_to_juggernaut_channels([ "chat.#{@chatroom.id}" ]) %>
+        <%= listen_to_juggernaut_channels([ "chat.#{@chatroom.id}" ]) %>
     <% end %>
 
     <div id="container">
-        <div id="nav" class="x-layout-inactive-content">
+        <div id="nav">
             <ul>
                 <% class_name = ( @me.is_guest? ) ? "signin-link" : "" %>
                 <li><%= link_to (_ "Home"), { :controller => "chatroom" }, :class => class_name %></li>
@@ -46,15 +39,11 @@
             </ul>
         </div>
 
-        <div>
-            <div id="main" class="x-layout-inactive-content">
-                <%= yield %>
-            </div>
-            <div id="sidebar" class="x-layout-inactive-content">
-                <%= render :partial => 'sidebar' %>
-            </div>
-        </div>
-    <%= render :partial => "chatroom/dialog" %>
+        <div id="main"><%= yield %></div>
+        <div id="sidebar"><%= render :partial => 'sidebar' %></div>
+	<div id="dialog"><%= render :partial => "chatroom/dialog" %></div>
+
+    </div>
   </body>
 </html>
 

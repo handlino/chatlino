@@ -34,140 +34,12 @@ Chatroom.prototype = {
             connected: false,
             'synchronize_subject': true
         };
-        this.initRoomLayout();
     },
 
     connect: function() {
         
     },
 
-    initRoomLayout: function() {
-        var layout = new Ext.BorderLayout(document.body, {
-            hideOnLayout: true,
-            north: {
-                titlebar: false,
-                collapsible: false,
-                split: false,
-                initialSize: 30
-            },
-            center: {
-                titlebar: true
-            },
-            east: {
-                titlebar: false,
-                collapsible: true,
-                split: true,
-                initialSize: 430
-            }
-        });
-        layout.beginUpdate();
-
-        var roomLayout = new Ext.BorderLayout('content', {
-            north: {
-                initialSize: 335,
-                titlebar: true,
-                split: false,
-                collapsible: true
-            },
-            center: {
-                autoScroll: true,
-                titlebar: true
-            }
-        });
-
-        var chatScreenLayout = new Ext.BorderLayout('chat-screen', {
-            center: {
-                titlebar: false,
-                autoScroll: true
-            },
-            south: {
-                split: true,
-                collapsible: true,
-                initialSize: 60,
-                minSize: 60,
-                maxSize: 60,
-                titlebar: false
-            }
-        });
-
-        var chatInputLayout = new Ext.BorderLayout('chat-input-area', {
-            center: {
-                titlebar: false,
-                autoScroll: false
-            },
-            east: {
-                collapsible: true,
-                split: true,
-                animate: true,
-                titlebar: false,
-                minSize: 60,
-                maxSize: 60,
-                initialSize: 60
-            }
-        });
-
-        chatInputLayout.add('center', new
-            Ext.ContentPanel("chat-input-textarea","Text"));
-        chatInputLayout.add('east', new
-            Ext.ContentPanel("chat-input-userinfo","User"));
-
-        chatScreenLayout.add('center',  new Ext.ContentPanel('chat-data'));
-        chatScreenLayout.add('south', new Ext.NestedLayoutPanel(chatInputLayout));
-
-        roomLayout.add('north', new Ext.ContentPanel('chat-subject', {
-            title: "Topic",
-            toolbar: 'subjectToolbar'
-            }));
-        roomLayout.add('center', new Ext.ContentPanel('sidebar', 'Members'));
-
-        var topMenu = new Ext.Toolbar('topmenu');
-        this.topMenu = topMenu;
-        topMenu.add(
-            {
-                text: 'Topic',
-                handler: function() {
-                    Chatroom.showHelpDialog('chatroom-topic-tab');
-                }
-            },
-            '-',
-            {
-                text: 'Help',
-                handler: function() {
-                    Chatroom.showHelpDialog();
-                }
-            },
-            '-',
-            {
-                text: 'Save',
-                handler: function() {
-                    Chatroom.saveChatlog();
-                }
-            },
-            '-',
-            {
-                text: 'X',
-                handler: function() {
-                    new Ajax.Request(
-                        "/chatroom/leave/" + Chatroom.info.id,
-                        {
-                            onComplete: function(){
-                                window.close();
-                            }
-                        });
-                }
-            }
-        );
-
-        layout.add('north', new Ext.ContentPanel('top', {
-            title: "Top Menu",
-            toolbar: 'topMenu'
-            }));
-        layout.add('center',   new Ext.NestedLayoutPanel(chatScreenLayout, 'Chat Screen'));
-        layout.add('east', new Ext.NestedLayoutPanel(roomLayout));
-
-        layout.endUpdate();
-        this.layout = layout;
-    },
     say: function(message, me) {
         if (typeof(me) == 'undefined')
             me = this.me
@@ -337,20 +209,7 @@ Chatroom.prototype = {
         subjectDialog.show();
     },
     onMenuReady: function() {
-        var chatMenu = new YAHOO.widget.Menu(
-            "chat-menu", {
-                position: "static"
-            });
-        if (document.getElementById('subject-dlg')) {
-            subjectDialog = new YAHOO.widget.Dialog(
-                "subject-dlg", {
-                    visible: false,
-                    draggable: false
-                });
-            subjectDialog.render();
-            var menuItem = chatMenu.addItem("Change Subject");
-            menuItem.clickEvent.subscribe(Chatroom.showSubjectDialog);
-        }
+
         chatMenu.render();
     },
     refreshUserInfo: function() {
@@ -392,13 +251,7 @@ Chatroom.prototype = {
     },
 
     initChangeUserPhotoHandler: function() {
-        YAHOO.util.Event.addListener(
-            $("chat-input-userinfo-photo"),
-            "click",
-            Chatroom.changeUserPhoto,
-            Chatroom,
-            true
-        );
+        
     },
 
     lightbox: null,
@@ -426,36 +279,6 @@ Chatroom.prototype = {
         e.scrollTop = e.scrollHeight;
     },
 
-    initDialog: function() {
-        if( typeof(this.dialog) == 'undefined' ) {
-            var dialog = new Ext.BasicDialog("chatroom-general-dlg", {
-                modal:true,
-                autoTabs:true,
-                width:600,
-                height:400,
-                shadow: true,
-                resizable: false,
-                collapsible: false
-            });
-            dialog.addKeyListener(27, dialog.hide, dialog);
-            dialog.addButton('Close', dialog.hide, dialog);
-            dialog.on("hide", function() {
-                  if ($("chat-input"))
-                      $("chat-input").focus();
-            });
-            dialog.on("show", function() {
-                document.getElementsByClassName("user-photo").each(
-                    function(e){
-                        var fit = Chatroom.fitImage(Chatroom.me.photo_path, 200);
-                        e.setAttribute("src", Chatroom.me.photo_path)
-                        e.setAttribute("width", fit.width)
-                        e.setAttribute("height", fit.height)
-                    }
-                )
-            });
-            this.dialog = dialog;
-        }
-    },
     showDialog: function() {
         this.dialog.show();
     },
@@ -499,12 +322,6 @@ if ( typeof String.prototype.trim == 'undefined' ) {
     }
 
 }
-
-YAHOO.util.Event.onAvailable("chat-input", Chatroom.focusOnInput);
-
-YAHOO.util.Event.onAvailable("chatroom-general-dlg", function() {
-    Chatroom.initDialog();
-});
 
 window.onunload =  function() {
     if (Chatroom.info) {
