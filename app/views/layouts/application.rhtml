@@ -16,22 +16,17 @@
                 <% if controller.controller_name == ('target' || 'dashboard') %>
                     <%= render :partial => "top" %>
                 <% end %>
-                <!-- #yui-main {{{ -->
-                <div id="yui-main">
-                    <div class="yui-b">
-                      <div id="message">
-                        <%= @message %>
-                        <% if flash[:notice] %><div class="flash_notice"><p><%= flash[:notice] %></p></div><% end %>
-                        <% if flash[:error] %><div class="flash_error"><p><%= flash[:error] %></p></div><% end %>
-                        <% if flash[:form_error] %><div class="flash_form_error"><p><%= flash[:form_error] %></p></div><% end %>
-                      </div>
-                      <%= yield %>
-                    </div>
-                </div>
-                <!-- END: #yui-main }}} -->
+                 <div id="message">
+                   <%= @message %>
+                   <% if flash[:notice] %><div class="flash_notice"><p><%= flash[:notice] %></p></div><% end %>
+                   <% if flash[:error] %><div class="flash_error"><p><%= flash[:error] %></p></div><% end %>
+                   <% if flash[:form_error] %>
+		       <div class="flash_form_error"><p><%= flash[:form_error] %></p></div>
+		   <% end %>
+                 </div>
+                 <%= yield %>
 
             </div>
-            <!-- END: #bd }}} -->
             <%= render :partial => "common/footer" %>
         </div>
     </body>

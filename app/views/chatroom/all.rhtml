@@ -1,5 +1,4 @@
-<div class="">
-  <div class="chatroom-list yui-u">
+  <div class="chatroom-list">
     <h1 class="title"><%= _ "All Chatroom" %><h1>
     <% @chatrooms.each do |c| %>
       <div class='chatroom-title'>
@@ -32,7 +31,5 @@
     <% end %>
   </div>
   <p><%= link_to "Create More Chatrooms", { :controller => "chatroom", :action => "create" } %></p>
-
-</div>
 
 
