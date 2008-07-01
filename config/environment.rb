@@ -55,8 +55,6 @@ end
 $KCODE = 'u'
 require "gettext/rails"
 
-PUSH_SOLUTION = "juggernaut"
-
 USER_COOKIE_EXPIRATION = 1.day
 USER_COOKIE_SECRET = "chatlino_secret"
 USER_PASSWORD_SALT = "chatlino_salt"

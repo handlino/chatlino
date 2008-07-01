@@ -9,10 +9,6 @@
     <%= javascript_include_tag "jsan/JSAN", "jsan/DOM/Ready", "jsan/DOM/Events", "jsan/Effect/RoundedCorners" %>
     <%= javascript_include_tag "jsan/Asynapse/Emoticon", "jsan/Widget/Lightbox", "json" %>
     <%= javascript_include_tag "chatroom" %>
-
-    <script type="text/javascript">
-        Chatroom.PUSH_SOLUTION = <%= @push_solution.to_json %>
-    </script>
   </head>
 
   <body>

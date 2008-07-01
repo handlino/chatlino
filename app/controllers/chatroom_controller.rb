@@ -1,7 +1,6 @@
 class ChatroomController < ApplicationController
 
   before_filter :login_required
-  before_filter :check_push_solution
 
   def index
     @chatrooms = Chatroom.find(:all)

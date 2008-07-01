@@ -42,8 +42,4 @@ class ApplicationController < ActionController::Base
     @javascripts << "#{controller_name}.js" if File.exists? script
   end
 
-  def check_push_solution
-    @push_solution = PUSH_SOLUTION
-  end
-
 end

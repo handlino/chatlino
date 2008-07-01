@@ -3,14 +3,13 @@
 Chatlino is a one simple application that provides just
 online-chatting functionality.
 
-== Requriements
+== Requriement gems
 
+* eventmachine
+* juggernaut
 * ruby-openid
-* openid
 
 == Run Chatlino with Juggernaut as push solution
-
-* Confirmed that PUSH_SOLUTION is set to "juggernaut" in environment.rb
 
 * Created your own config/juggernaut_config.yml based on
   config/juggernaut_config.yml.template
