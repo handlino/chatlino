@@ -9,7 +9,8 @@ class ChatroomsController < ApplicationController
     render :layout => "application"
   end
   def new
-    
+    @chatroom = Chatroom.new
+
   end
   
   def create
