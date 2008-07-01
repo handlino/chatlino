@@ -1,19 +1,18 @@
 <% form_tag session_path do -%>
-<p><label for="login">Login</label><br/>
-<%= text_field_tag 'login' %></p>
-
-<p><label for="password">Password</label><br/>
-<%= password_field_tag 'password' %></p>
 
 <!-- Uncomment this if you want this functionality
 <p><label for="remember_me">Remember me:</label>
 <%= check_box_tag 'remember_me' %></p>
 -->
-    <p>
-      <label for="openid_url">OpenID:</label>
-      <%= text_field_tag "openid_url" %>
-    </p>
-<p><%= submit_tag 'Log in' %></p>
+<%= image_tag "icon-openid.png" %>
+<p><%= text_field_tag "openid_url", "http://",:class => "login-openid" %> </p>
+
+<p class="eg">                                                    
+e.g.<br>                                                          
+Flickr: http://www.flickr.com/photos/yourname<br>                 
+Blogger: http://yourblog.blogspot.com<br>                         
+ClaimID: http://claimid.com/yourname<br>                          
+</p> 
+<p><%= submit_tag 'SIGN IN',:class =>"login-submit" %></p>
 <% end -%>
 
-<%= link_to 'Sign Up?', :controller => "users", :action => "new" %>
