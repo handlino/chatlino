@@ -18,6 +18,10 @@ body {
     background: url(../../images/left-wrap.png) left top repeat-y;
 }
 
+.chatlino.container:after {
+    content: "";
+}
+
 img.logo {
     margin-top: 50px;
     margin-left: 20px;
@@ -35,10 +39,6 @@ img.title {
     background: #2fcc24;
 }
 
-#container-background-left:after {
-    content: "";
-}
-
 #hd {
     width: 780px;
 }
@@ -47,26 +47,25 @@ img.title {
     height: 270px;
     margin: 0;
     padding: 0;
+    width: 380px;
 }
 
 #left-head {
     background: url(../../images/left-head.png) top left no-repeat;
-    width: 380px;
 }
 
 #right-head {
     background: url(../../images/right-head.png) top left no-repeat;
-    width: 380px;
 }
 
 #bd {
     background: url(../../images/bd.png) top left repeat;
-    min-height: 500px;
+    min-height: 600px;
 }
 
 #ft {
     background: url(../../images/ft.png) top left no-repeat;
-    height: 200px;
+    height: 150px;
 }
 
 #bd .inner {
@@ -77,11 +76,14 @@ img.title {
 #policy {
     margin-left: 120px;
     margin-top: 90px;
+    font-family: Arial;
+    font-size: 12px;
 }
 
 #policy .link,
 #policy a {
     color: #fff;
+    text-decoration: none;
 }
 
 p.eg {
