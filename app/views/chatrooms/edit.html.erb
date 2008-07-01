@@ -1,0 +1,14 @@
+<% form_for :chatroom, :url => chatroom_path(@chatroom), :html => {:method => :put} do |f| -%>
+  <div>
+    <dl>
+      <dt>Title</dt>
+      <dd><%= f.text_field :title %>
+      </dd>
+      <dt>Description</dt>
+      <dd><%= f.text_area :description %>
+      </dd>
+    </dl>
+    <%= submit_tag "Save" %>
+  </div>
+
+<% end -%>
