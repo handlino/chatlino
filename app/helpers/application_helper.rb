@@ -13,7 +13,7 @@ module ApplicationHelper
       :user_name => user.login,
       :shortname => user.shortname,
 #      :photo_path => user.photo_path,
-      :link_to_shortname => "<a href=\"#{url_for :controller=>'user', :action=>'show', :id=>user.id}\">#{user.shortname}</a>"
+      :link_to_shortname => link_to( user.shortname, user_path(user) )
     }
   end
 

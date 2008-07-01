@@ -2,13 +2,12 @@
     <div id="policy" class="span-20">
 	<div class="span-4 copyright">copyright © 2008 Chatlino</div>
 	<div class="span-12 link">
-	    <%= link_to _("About Chatlino"),	:controller => "about" %> |
-	    <%= link_to _("Contact"),		:controller => "about",	    :action => "contact" %> |
-	    <%= link_to _("Blog"),		:controller => "blog" %> |
-	    <%= link_to _("Help"),		:controller => "service",   :action => "help" %> |
-	    <%= link_to _("Term of Service"),	:controller => "service",   :action => "terms" %> |
-	    <%= link_to _("Feedback"),		:controller => "feedback",  :action => "feedback" %> |
-	    <%= link_to _("Privacy"),		:controller => "about",	    :action => "privacy" %>
+	    <%= link_to _("About Chatlino"), about_path %> |
+	    <%= link_to _("Contact"), contact_path %> |
+	   
+	    <%= link_to _("Help"), help_path %> |
+	    <%= link_to _("Term of Service"), tos_path %> |
+	    <%= link_to _("Privacy"), privacy_path %>
 	</div>
     </div>
 </div>
