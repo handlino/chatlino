@@ -1,0 +1,12 @@
+<% for chatroom in @chatrooms %>
+<div class="span-15">
+  <div class="room-icon span-4">
+    <%= image_tag "icon-room.png" %>
+   </div>
+  <div class="room-detail span-7">
+    <div class="room-name"><%= h chatroom.title %></div>
+    <div class="room-desc"><%= h chatroom.description %></div>
+  </div>
+  <div class="room-join span-4 last"><%= image_tag "icon-join.png" %></div>
+</div>
+<% end %>

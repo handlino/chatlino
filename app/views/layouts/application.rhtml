@@ -16,8 +16,10 @@
 
                 <div id="hd" class="span-18 last">
                     <div id="left-head" class="span-1">
-			<%= image_tag "logo.png", :class => "logo" %>
-      <%= image_tag "title-login.png", :class => "title" %>
+                      <%= image_tag "logo.png", :class => "logo" %>
+                      <% if controller.controller_name =="chatrooms" && controller.action_name =="index" %>
+                        <%= image_tag "title-list.png", :class => "title" %>
+                      <% end %>
                     </div>
                     <div id="right-head" class="span-1">&nbsp;</div>
                 </div>
