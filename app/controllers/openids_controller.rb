@@ -12,20 +12,21 @@ class OpenidsController < ApplicationController
   end
 
   def destroy
-  
+
     user_openid = current_user.openids.find(params[:id])
 
     if current_user.openids.count > 1
       if user_openid.destroy
-        flash[:notice] = "OpenID deleted" 
+        flash[:notice] = "OpenID deleted"
       else
         flash[:error] = "OpenID delete failed."
       end
     else
-        flash[:notice] = "You only have 1 Openid"
+      flash[:notice] = "You only have 1 Openid"
     end
-      respond_to do |format|                                                        format.html { redirect_to edit_user_url(current_user) }
-      end   
+    respond_to do |format|
+      format.html { redirect_to edit_user_url(current_user) }
+    end
 
   end
 

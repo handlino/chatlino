@@ -7,126 +7,20 @@ class ChatroomController < ApplicationController
     render :layout => "application"
   end
 
-  def all
-    @chatrooms = Chatroom.find(:all)
-    render :action => "all", :layout => "application"
-  end
-
   def show
     @subject_prefix = "chat"
     @chatroom = Chatroom.find(params['id'])
   end
 
   def create
-    if request.xhr?
-      @chatroom = Chatroom.new
-
-      if params[:chatroom]
-        if params[:agree_toc]
-          @chatroom = Chatroom.new(params[:chatroom])
-          @chatroom.owner = current_user
-          @chatroom.save
-          flash.now[:notice] = _("New Chatroom Is Created.")
-          params[:id] = params[:return_to_list] || "my"
-          params[:subject] = @chatroom.subject
-          return show_list
-        else
-          flash.now[:error] = _("Without agreeing the Terms of Conditions, you cannot create your Chatroom.")
-          @chatroom = Chatroom.new(params[:chatroom])
-        end
-      end
-
-      @chatroom.subject = params[:subject] if params[:subject]
-      @chatroom.title = params[:title] if params[:title]
-
-      render :update do |page|
-        page.replace_html("chatroom-list", :partial => "creation_form",
-                          :locals => {
-                            :chatroom => @chatroom,
-                            :return_to_list => params[:return_to_list],
-                            :subject => params[:subject]
-                          })
-      end
-      return
-    end
-
-    if request.post?
+   
       @chatroom = Chatroom.new(params[:chatroom])
       @chatroom.owner = current_user
       @chatroom.save
       flash.now[:notice] = _("New Chatroom Is Created.")
       return all()
-    end
+
     render :action => 'edit', :layout => "application"
-  end
-
-  def show_list
-    if params[:id]
-      @chatroom_warning = StaticPage.content_by_subject_and_locale("chatroom_warning", @app_locale, _("Chatroom warning"))
-      message_if_empty = _("Empty List")
-      case params[:id]
-      when "all" then
-        list = Chatroom.find(:all, :page => { :size => 8, :current => (params[:page] || 1) })
-      when "hottest" then
-        @root_room = Chatroom.find(:first)
-        list = Chatroom.hottest(8)
-        message_if_empty = render_to_string :partial => "/chatroom/hottest_chatroom_description"
-      when "recently_created" then
-        list = Chatroom.latest(8)
-      when "my" then
-        list = current_user.chatrooms
-      when "my_favorites" then
-        list = current_user.favorite_chatrooms
-      when "with_subject" then
-        title = _("Chatrooms talking about this target")
-        list = Chatroom.find(:all, :conditions => [ "subject = ?", params[:subject] ])
-      when "most_popular" then
-        list = FavoriteChatroom.find(:all,
-                                     :select => "item_id, count(user_id) as user_count",
-                                     :group => "item_id", :order => "user_count DESC",
-                                     :page => { :size => 8, :current => (params[:page] || 1) }
-                                     )
-      else
-        list = Chatroom.hottest(8)
-      end
-
-      render :update do |page|
-        page.replace_html("chatroom-list",
-                          :partial => "quick_list",
-                          :locals => {
-                            :list_id => params[:id],
-                            :list_title => defined?(title) ? title : ( params[:id] + "_chatrooms" ),
-                            :chatroom_list => list,
-                            :message_if_empty => message_if_empty
-                          })
-        if flash.now[:notice]
-          page.call("message", _("Notice"), flash.now[:notice] )
-          page.replace_html("chatroom-menu",
-                            :partial => "/chatroom/chatroom_menu")
-        end
-        page<<("Localization.show_dates_as_local_time()")
-      end
-    end
-  end
-
-  def search
-    if params[:q].length > 0
-      list = Chatroom.find_by_contents(params[:q])
-      render :update do |page|
-        page.replace_html("chatroom-list",
-                          :partial => "quick_list",
-                          :locals => {
-                            :list_title =>
-                            sprintf(_("Search result for %s"), params[:q]),
-                            :chatroom_list => list
-                          })
-        page.visual_effect("highlight", "chatroom-list")
-      end
-      return
-    end
-    render :update do |page|
-      page.call("Ext.Msg.alert", _("Empty Search String"), _("Enter something if you really want to search. eg. 2303, GOOG, shlee, ..."))
-    end
   end
 
   def edit
@@ -144,6 +38,7 @@ class ChatroomController < ApplicationController
     render :action => 'edit', :layout => "application"
   end
 
+  # destroy
   def close
     c = Chatroom.find(params[:id])
     if c.owner == current_user

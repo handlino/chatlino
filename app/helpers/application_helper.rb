@@ -13,7 +13,7 @@ module ApplicationHelper
       :user_name => user.login,
       :shortname => user.shortname,
 #      :photo_path => user.photo_path,
-      :link_to_shortname => link_to( user.shortname, user_path(user) )
+      :link_to_shortname => '<a href="#">FIXME</a>' #link_to( user.shortname, user_path(user) )
     }
   end
 
