@@ -1,0 +1,36 @@
+<h1>Settings</h1>
+
+<%= error_messages_for :user %>
+<% form_for :user, :url => user_path(@user), :html => {:method => :put} do |f| -%>
+
+<p><label for="login">Login</label><br/>
+<%= f.text_field :login %></p>
+
+<p><label for="email">Email</label><br/>
+<%= f.text_field :email %></p>
+<% if @user.crypted_password %>
+<p><label for="password">Password</label><br/>
+<%= f.password_field :password %></p>
+
+<p><label for="password_confirmation">Confirm Password</label><br/>
+<%= f.password_field :password_confirmation %></p>
+<% end %>
+<p><label for="openid">OpenIDs </label><br/>
+<p>
+<ul>
+<% @user_openids.map do |o| %>
+<li>
+<%= link_to('[delete this openid]', user_openid_path(@user, o), :confirm => "Are you sure?", :method => :delete) %>
+  <%= link_to(o.denormalized_url, o.openid_url) %> </li>
+<% end %>
+</ul>
+</p>
+<br/>
+<%= link_to("Add an OpenID", open_id_complete_on_user_path) %>
+
+
+<p>
+  <%= submit_tag 'Save', :disable_with => "Saving&hellip;" %>
+  <%= link_to 'logout', logout_url %>
+</p>
+<% end -%>
