@@ -1,23 +1,4 @@
-Juggernaut.debug = false;
-Juggernaut.verbose_debug = false;
-
-// FIXME
-// Juggernaut Overrides
-//Juggernaut.connected = function () {
-//    Juggernaut._verbose_log('You have been connected');
-//
-//    new Ajax.Request('/chatroom/send_join', {
-//        parameters: {
-//            id: Chatroom.info.id
-//        },
-//        asynchronous: true,
-//        evalScripts:true
-//    });
-//    Chatroom.Event.append("[INFO] Connected to juggernaut push server")
-//    Chatroom.Event.append("Chatroom subject updated")
-//}
-
-Chatroom = function() { }
+Chatroom = function() { };
 
 Chatroom.prototype = {
     me: null,
@@ -316,8 +297,22 @@ if ( typeof String.prototype.trim == 'undefined' ) {
     String.prototype.trim = function() {
         return this.replace(/^\s+/, "").replace(/\s+$/,"");
     }
-
 }
+
+// Juggernaut Overrides
+
+$(document).observe("juggernaut:connected", function () {
+    new Ajax.Request('/chatroom/send_join', {
+        parameters: {
+            id: Chatroom.info.id
+        },
+        asynchronous: true,
+        evalScripts:true
+    });
+    Chatroom.Event.append("[INFO] Connected to juggernaut push server")
+    Chatroom.Event.append("Chatroom subject updated")
+});
+
 
 window.onunload =  function() {
     if (Chatroom.info) {

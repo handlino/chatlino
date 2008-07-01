@@ -2,7 +2,4 @@
 // This file is automatically included by javascript_include_tag :defaults
 
 // Dummy l10n placeholder.
-_ = function(str) { return str }
-
-Juggernaut.debug = false;
-Juggernaut.verbose_debug = false;
+_ = function(str) { return str };

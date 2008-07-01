@@ -28,7 +28,7 @@ module ApplicationHelper
 
   def user_shortname_with_link(user)
     if user
-      "<a href=\"#{url_for :controller=>'user', :action=>'show', :id=>user.id}\">#{user.shortname}</a>"
+      "<a href=\"#{url_for :controller=>'users', :action=>'show', :id=>user.id}\">#{user.shortname}</a>"
     else
       "(no user)"
     end

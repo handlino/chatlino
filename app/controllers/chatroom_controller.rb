@@ -13,13 +13,13 @@ class ChatroomController < ApplicationController
   end
 
   def create
-   
+   if request.post?
       @chatroom = Chatroom.new(params[:chatroom])
       @chatroom.owner = current_user
       @chatroom.save
       flash.now[:notice] = _("New Chatroom Is Created.")
       return all()
-
+    end
     render :action => 'edit', :layout => "application"
   end
 
@@ -135,14 +135,13 @@ class ChatroomController < ApplicationController
     chat_message = params['chat-input'] or return render(:nothing => true)
     @chatroom = Chatroom.find(params[:id])
     
-    # FIXME
-    #if ! @chatroom.users.include?(current_user)
-    #  render :update do |page|
-    #    msg = (_ "Your are not allowed to send chat message to this room")
-    #    page<<("Chatroom.Event.append(#{msg.to_json})")
-    #  end
-    #  return
-    #end
+    if ! @chatroom.users.include?(current_user)
+      render :update do |page|
+        msg = (_ "Your are not allowed to send chat message to this room")
+        page<<("Chatroom.Event.append(#{msg.to_json})")
+      end
+      return
+    end
 
     if chat_message.match(/^\//)
       m = /^(?:\/( |[a-z]+))?\s?(.*)?$/um.match(chat_message)

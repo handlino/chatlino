@@ -14,7 +14,7 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.resource :session
   
-  map.connect 'chatroom/:action/:id', :controller => "chatroom"
+  map.connect '/chatroom/:action/:id', :controller => "chatroom"
   
   # Sample of regular route:
   # map.connect 'products/:id', :controller => 'catalog', :action => 'view'
