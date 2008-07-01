@@ -26,16 +26,15 @@ module ChatSystem
     end
   end
 
-  #def disconnect
-  #  logger.debug( request.host_with_port )
-  #  if request.host_with_port == '127.0.0.1'
-  #    logger.debug( params[:session_id] )
-  #    user = User.find_by_login( params[:client_id] )
-  #    ChatroomUser.delete_all( ["user_id = ?", user.id] )
-  #    Juggernaut.send_to_all("Chatroom.leave(#{user_to_json(user)});")
-  #  end
-  #  render :nothing => true
-  #end
+  def disconnect
+    logger.debug( "request disconnect from #{request.remote_ip}" )
+    if request.remote_ip == '127.0.0.1'
+      user = User.find_by_login( params[:client_id] )
+      ChatroomUser.delete_all( ["user_id = ?", user.id] )
+      Juggernaut.send_to_all("Chatroom.leave(#{user_to_json(user)});")
+    end
+    render :nothing => true
+  end
 
   def refresh_info
     chatroom_hash = {
