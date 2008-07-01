@@ -11,6 +11,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :users do |user|
     user.resources :openids
+    user.resource :icon, :controller => 'user_icons'
   end
   map.resource :session
   

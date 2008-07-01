@@ -1,0 +1,21 @@
+<h2 class="title">Upload Your Own Avatar</h2>
+
+<% form_for @buddy_icon, :url => user_icon_path(current_user), :html => { :multipart => true } do |f| -%>
+<%= error_messages_for :buddy_icon %>              
+
+<div class="basic-form">
+    <% if current_user.buddy_icon %>
+    <p>
+        <%= buddy_icon(current_user,false) %>
+        <%= link_to 'Delete icon', user_icon_path(current_user), :method => :delete %>
+    </p>
+    <% end %>
+    
+    <%= file_field 'buddy_icon', 'uploaded_data' %>
+    <p>Our avatar size is 80x80 by default.</p>
+    <p><%= submit_tag 'Upload', :disable_with => 'Submiting...', :class => "button" %> or <%= link_to "Back to Settings", edit_user_path(current_user) %></p>
+    
+</div>
+  
+<% end -%>
+

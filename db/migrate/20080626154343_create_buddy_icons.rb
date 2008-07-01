@@ -9,6 +9,7 @@ class CreateBuddyIcons < ActiveRecord::Migration
       t.column :size, :integer                                              
       t.column :width, :integer                                             
       t.column :height, :integer
+      t.column :user_id, :integer
       t.timestamps
     end
   end
