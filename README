@@ -15,14 +15,9 @@ online-chatting functionality.
 * Created your own config/juggernaut_config.yml based on
   config/juggernaut_config.yml.template
 
-* Run script/push_server
+* Run juggernaut -c config/juggernaut.yml
 
 * Run this rails app in anyway you prefer
-
-== Run Chatlino with iPush as push solution
-
-* Need to document this part
-* About iPush, see also http://www.push4free.com
 
 == COPYRIGH / LICENSE
 

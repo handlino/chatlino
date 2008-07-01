@@ -46,6 +46,8 @@ Rails::Initializer.run do |config|
   # config.active_record.default_timezone = :utc
 
   # See Rails::Configuration for more options
+  
+  config.gem "juggernaut",  :version => '>=0.5.4'
 end
 
 # Add new inflection rules using the following format

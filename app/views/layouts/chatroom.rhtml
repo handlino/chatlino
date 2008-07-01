@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Chatlino</title>
     <%= stylesheet_link_tag *(['main'] + @stylesheets) %>
-    <%= javascript_include_tag :defaults %>
+     <%= javascript_include_tag "prototype",'controls','effects','juggernaut/swfobject', 'juggernaut/juggernaut','application'  %>
     <%= javascript_include_tag "jsan/JSAN", "jsan/DOM/Ready", "jsan/DOM/Events", "jsan/Effect/RoundedCorners"%>
     <%= javascript_include_tag "jsan/Asynapse/Emoticon", "jsan/Widget/Lightbox", "json" %>
 
@@ -13,7 +13,8 @@
         <%= javascript_include_tag "pjax/pjax" %>
         <%= javascript_include_tag "ipush" %>
     <% end %>
-
+    
+   
     <%= javascript_include_tag "chatroom" %>
 
     <script type="text/javascript">
@@ -27,7 +28,12 @@
             var iplink = new iPush2Link();
         </script>
     <% elsif @push_solution == "juggernaut" %>
-        <%= listen_to_juggernaut_channels([ "chat.#{@chatroom.id}" ]) %>
+        <%= 
+        #listen_to_juggernaut_channels([ "chat.#{@chatroom.id}" ]) 
+        %>
+
+        <%= juggernaut :channels => [ "chat.#{@chatroom.id}" ]
+         %>
     <% end %>
 
     <div id="container">

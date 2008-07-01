@@ -1,20 +1,21 @@
 Juggernaut.debug = false;
 Juggernaut.verbose_debug = false;
 
+// FIXME
 // Juggernaut Overrides
-Juggernaut.connected = function () {
-    Juggernaut._verbose_log('You have been connected');
-
-    new Ajax.Request('/chatroom/send_join', {
-        parameters: {
-            id: Chatroom.info.id
-        },
-        asynchronous: true,
-        evalScripts:true
-    });
-    Chatroom.Event.append("[INFO] Connected to juggernaut push server")
-    Chatroom.Event.append("Chatroom subject updated")
-}
+//Juggernaut.connected = function () {
+//    Juggernaut._verbose_log('You have been connected');
+//
+//    new Ajax.Request('/chatroom/send_join', {
+//        parameters: {
+//            id: Chatroom.info.id
+//        },
+//        asynchronous: true,
+//        evalScripts:true
+//    });
+//    Chatroom.Event.append("[INFO] Connected to juggernaut push server")
+//    Chatroom.Event.append("Chatroom subject updated")
+//}
 
 Chatroom = function() { }
 

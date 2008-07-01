@@ -240,13 +240,15 @@ class ChatroomController < ApplicationController
   def send_chat_message
     chat_message = params['chat-input'] or return render(:nothing => true)
     @chatroom = Chatroom.find(params[:id])
-    if ! @chatroom.users.include?(@me)
-      render :update do |page|
-        msg = (_ "Your are not allowed to send chat message to this room")
-        page<<("Chatroom.Event.append(#{msg.to_json})")
-      end
-      return
-    end
+    
+    # FIXME
+    #if ! @chatroom.users.include?(@me)
+    #  render :update do |page|
+    #    msg = (_ "Your are not allowed to send chat message to this room")
+    #    page<<("Chatroom.Event.append(#{msg.to_json})")
+    #  end
+    #  return
+    #end
 
     if chat_message.match(/^\//)
       m = /^(?:\/( |[a-z]+))?\s?(.*)?$/um.match(chat_message)
@@ -436,7 +438,7 @@ class ChatroomController < ApplicationController
     end
 
     if @chatroom
-      Juggernaut.send_data(data, [ "chat.#{@chatroom.id}" ])
+      Juggernaut.send_to_channel(data, [ "chat.#{@chatroom.id}" ])
     end
 
     render :nothing => true
