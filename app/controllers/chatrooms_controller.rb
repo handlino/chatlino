@@ -2,8 +2,6 @@ class ChatroomsController < ApplicationController
   
   before_filter :login_required
  
-  # TODO chatroom permission
-
   include ChatSystem
 
   def index
@@ -30,7 +28,7 @@ class ChatroomsController < ApplicationController
 
   def update
     @chatroom = Chatroom.find(params[:id])
-    if @chatroom.update_attributes( params[:chatroom] )
+    if @chatroom.update_attributes(params[:chatroom]) && @chatroom.owner == current_user
       redirect_to chatrooms_path
     else
       render :action => "edit"
@@ -38,7 +36,10 @@ class ChatroomsController < ApplicationController
   end
 
   def destroy
-    @chatroom.destroy
+    @chatroom = Chatroom.find(params[:id])
+    if @chatroom.owner == current_user
+      @chatroom.destroy
+    end
     redirect_to chatrooms_path
   end
   

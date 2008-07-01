@@ -7,7 +7,11 @@
   <div class="room-detail span-7">
     <div class="room-name"><%= h chatroom.title %></div>
     <div class="room-desc"><%= h chatroom.description %></div>
+    <% if chatroom.owner == current_user %>
+    <div class="debug"> <%= link_to "Edit Chatroom", edit_chatroom_path(chatroom) %> | <%= link_to "Close Chatroom", chatroom_path(chatroom), :method =>:delete %>
+    </div>
+  <% end %>
   </div>
-  <div class="room-join span-4 last"><%= image_tag "icon-join.png" %></div>
+  <div class="room-join span-4 last"><%= link_to image_tag("icon-join.png"),chatroom_path(chatroom) %></div>
 </div>
 <% end %>
