@@ -9,11 +9,11 @@
             <%= text_field "invitation", "email" %>
             <br>
  
-            <label for="invitation_subject">{<%= _"Subject:" %></label>
+            <label for="invitation_subject"><%= _"Subject:" %></label>
             <%= text_field "invitation", "subject" %>
             <br>
  
-            <%= label (:for => "invitation_message") { _"Message for the user:" } %>
+            <label for="invitation_message"><%= _"Message for the user:" %>
             <%= text_area "invitation", "message", :size => "60x5" %>
             <br>
  

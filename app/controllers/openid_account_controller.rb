@@ -43,6 +43,7 @@ class OpenidAccountController < ApplicationController
       if @user.nil?
         @user = User.new(:openid_url => response.identity_url)
         @user.nickname = response.identity_url
+        @user.user_name = response.identity_url
         if @user.save
           logger.debug("saved #{@user.id}")
         end

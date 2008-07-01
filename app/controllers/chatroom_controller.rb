@@ -175,6 +175,7 @@ class ChatroomController < ApplicationController
         page<<("Chatroom.Event.append(#{msg.to_json})")
       end
     end
+    render(:nothing => true)
   end
 
   def change_my_chat_subject
