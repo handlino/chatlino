@@ -101,6 +101,10 @@ input.login-openid {
     background: #eee;
 }
 
+.login-openid:focus {
+    background: #fff;
+}
+
 .room-name {
     color: #2ecc24;
     font-size: 24px;
@@ -112,4 +116,8 @@ input.login-openid {
     color: #fff;
     font-size: 14px;
     padding: 7px 18px;
+}
+
+.copyright {
+    color: #333;
 }
