@@ -72,21 +72,7 @@ class ChatroomController < ApplicationController
     render(:nothing => true)
   end
 
-  def change_my_chat_subject
-    new_subject = params["chatroom-my-subject"]
-    render :update do |page|
-      page.call("Chatroom.changeSubject", new_subject)
-    end
-  end
-
-  def restore_chat_subject
-    @chatroom = Chatroom.find(params['id'])
-    new_subject = @chatroom.subject || 1000
-    render :update do |page|
-      page.call("Chatroom.changeSubject", new_subject)
-    end
-  end
-
+  #call from browser when someone join/leave
   def refresh_user_info
     @chatroom = Chatroom.find(params['id'])
 
@@ -103,20 +89,11 @@ class ChatroomController < ApplicationController
     end
   end
 
+  # change myself
   def change_user_photo
     user_photo = params['user-photo'] or return :nothing => true;
     params['chat-input'] = "/set photo_path #{user_photo}";
     send_chat_message
-  end
-
-  def save_chatlog
-    if request.post?
-      render :update do |page|
-        page.alert(_("Not Implemented"))
-      end
-      return
-    end
-    render :nothing => true
   end
 
   def send_join
@@ -280,18 +257,6 @@ class ChatroomController < ApplicationController
                             ].join(""));
     end
     render :nothing => true
-  end
-
-  def send_chart_command
-    cmd = params[:cmd] or return :nothing => true
-    Chatroom.update( params[:id], { :sketch => cmd });
-
-    cmd = cmd.to_json
-    event_msg = (_ "#{current_user.shortname} sends new sketches.")
-    send_push_data "
-      Chatroom.Event.append(#{event_msg.to_json});
-      Chatroom.sketch(#{cmd});
-    "
   end
 
   def ping

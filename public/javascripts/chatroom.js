@@ -118,12 +118,6 @@ Chatroom.prototype = {
         this.subject = new_subject;
         $("chat-subject-object").innerHTML = new_subject;
     },
-    changeMySubject: function() {
-        var new_subject = new String($("chatroom-my-subject").value.trim())
-        if (new_subject.isBlank()) return;
-
-        Chatroom.changeSubject( new_subject );
-    },
     toggleSync: function(item, pressed) {
         if (pressed) {
             Chatroom.combo.container.hide();
@@ -240,17 +234,6 @@ Chatroom.prototype = {
     changeUserPhoto: function() {
         var html = $("change-user-photo-dlg-content").innerHTML;
         alert("no dialog variable.");
-    },
-
-    saveChatlog: function() {
-        new Ajax.Request('/chatroom/save_chatlog', {
-            method: 'post',
-            asynchronous: false,
-            parameters: {
-                id: this.info.id,
-                body: "<table>" + $('chat-data-tbody').innerHTML + "</table>"
-            }
-        })
     },
 
     scrollToBottom: function() {
