@@ -95,8 +95,21 @@ form#login label {
     font-size: 18px;
 }
 
-form#login input {
+input.login-openid {
     border: 1px solid #2ecc24;
     font-size: 20px;
-    background: #ddd;
+    background: #eee;
+}
+
+.room-name {
+    color: #2ecc24;
+    font-size: 24px;
+}
+
+.login-submit {
+    border: 0;
+    background: #ffa000;
+    color: #fff;
+    font-size: 14px;
+    padding: 7px 18px;
 }
