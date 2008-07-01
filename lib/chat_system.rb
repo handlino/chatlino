@@ -221,6 +221,7 @@ module ChatSystem
   end
 
   def require_chatroom_user
+    @chatroom = Chatroom.find(params[:id])
     unless @chatroom.users.include?(current_user)
       render :update do |page|
         msg = _("Your are not allowed to send chat message to this room")
@@ -231,6 +232,7 @@ module ChatSystem
   end
 
   def require_chatroom_owner
+    @chatroom = Chatroom.find(params[:id])
     unless current_user.is_owner_of(@chatroom)
       render :update do |page|
         msg = _("Your are not allowed to do this operation in this room")
