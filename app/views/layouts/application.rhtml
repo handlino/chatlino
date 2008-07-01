@@ -31,7 +31,9 @@
 			   <% if flash[:form_error] %><div class="flash_form_error"><p><%= flash[:form_error] %></p></div><% end %>
          </div>
          <% if current_user %>
-           <div style="float:right;"><%= link_to 'Settings', edit_user_path(current_user) %> </div>
+           <div style="float:right;">
+             <%= link_to 'Logout', logout_path %> |
+             <%= link_to 'Settings', edit_user_path(current_user) %> </div>
          <% end %>
 			<%= yield %>
 		    </div>
