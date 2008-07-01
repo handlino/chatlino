@@ -16,7 +16,7 @@
   <p><%= c.description %></p>
   <p>
     <span><%= _("Chatroom Owner:") %></span>
-    <span><%= user_shortname_with_link(c.owner) %></span>
+    <span><%= user_link(c.owner) %></span>
   </p>
   <p><%= "#{c.users.length} users chatting" %></p>
 

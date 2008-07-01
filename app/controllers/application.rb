@@ -1,11 +1,7 @@
 class ApplicationController < ActionController::Base
 
-  helper :all # include all helpers, all the time
+  helper :all
   include AuthenticatedSystem
-
-  include ApplicationHelper
-  include ActionView::Helpers::JavaScriptHelper
-  include ActionView::Helpers::AssetTagHelper
 
   before_filter :check_lang
   before_filter :add_stylesheets

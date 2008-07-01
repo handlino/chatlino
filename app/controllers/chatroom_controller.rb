@@ -1,7 +1,8 @@
 class ChatroomController < ApplicationController
 
   before_filter :login_required
-
+  helper :chat
+  
   def index
     @chatrooms = Chatroom.find(:all)
     render :layout => "application"

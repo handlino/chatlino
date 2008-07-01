@@ -1,4 +1,8 @@
-module UserIconsHelper
+module UsersHelper
+  
+  def user_link(user)
+    link_to user.shortname, user_path(user)
+  end
   
   def buddy_icon(user,size = nil )
     return image_tag( buddy_icon_path(user,size), :class => "photo" )

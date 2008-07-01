@@ -13,7 +13,7 @@
 
   <body>
   
-  <%= juggernaut :channels => [ "chat.#{@chatroom.id}" ] %>
+  <%= juggernaut :client_id => current_user.login, :channels => [ "chat.#{@chatroom.id}" ] %>
 
     <div id="container">
         <div id="nav">

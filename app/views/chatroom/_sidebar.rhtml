@@ -3,7 +3,7 @@
     <% @chatroom.users.each do |u| %>
       <div class="item" id="chatroom-userlist-user<%= u.id %>">
         <%= buddy_icon(u, :small) %>
-        <span><%= user_shortname_with_link(u) %></span>
+        <span><%= user_link(u) %></span>
       </div>
     <% end %>
   </div>

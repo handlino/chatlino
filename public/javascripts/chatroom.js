@@ -174,7 +174,7 @@ Chatroom.prototype = {
         chatMenu.render();
     },
     refreshUserInfo: function() {
-        new Ajax.Request('/chatroom/' + this.info.id + '/refresh_info', {
+        new Ajax.Request('/chatrooms/' + this.info.id + '/refresh_info', {
             onComplete: function() {
                 Chatroom.redrawUserList()
                 Chatroom.redrawMyIcon()
