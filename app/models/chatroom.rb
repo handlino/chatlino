@@ -18,11 +18,8 @@ class Chatroom < ActiveRecord::Base
   has_many :chatroom_users
   has_many :users, :through => :chatroom_users
 
-  def has_owner(user=nil)
-    if !user
-      return false
-    end
-    return (chatroom.owner == user)
+  def has_owner?( user )
+    chatroom.owner == user
   end
 
 end

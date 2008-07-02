@@ -146,7 +146,7 @@ module ChatSystem
   def cmd_kick(msg)
     user = User.find_by_name(msg)
 
-    if current_user.is_owner_of(@chatroom)
+    if @chatroom.has_owner?(current_user)
       if ( user && user == current_user && @chatroom.users.include?(user) )
         msg = _("You don't really mean to kick yourself, do you ?")
       elsif ( user && @chatroom.users.include?(user) )
@@ -213,7 +213,7 @@ module ChatSystem
 
   def require_chatroom_owner
     @chatroom = Chatroom.find(params[:id])
-    unless current_user.is_owner_of(@chatroom)
+    unless @chatroom.has_owner?(current_user)
       render :update do |page|
         msg = _("Your are not allowed to do this operation in this room")
         page << "Chatroom.Event.append(#{msg.to_json})"

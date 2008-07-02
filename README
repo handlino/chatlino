@@ -11,8 +11,7 @@ online-chatting functionality.
 
 == Run Chatlino with Juggernaut as push solution
 
-* Created your own config/juggernaut_config.yml based on
-  config/juggernaut_config.yml.template
+* Setup your own config/juggernaut.yml and config/juggernaut_hosts.yml
 
 * Run juggernaut -c config/juggernaut.yml
 
@@ -20,7 +19,7 @@ online-chatting functionality.
 
 == COPYRIGH / LICENSE
 
-Copyright (c) 2007, Kang-min Liu <gugod@handlino.com>, Lukhnos d. Liu <lukhnos@handlino.com>, Liang Bin Hsueh <hlb@handlino.com>
+Copyright (c) 2008, Handlino Inc.
 
 All rights reserved.
 

@@ -42,16 +42,8 @@ class User < ActiveRecord::Base
     u && u.authenticated?(password) ? u : nil
   end
 
-  has_many :chatroom_users
-  has_many :chatrooms, :through => :chatroom_users
- 
-  def is_owner_of(chatroom)
-    chatroom.owner == self
-  end
-
   def shortname
-    shortname = name.blank? ? "Chatter #{id}" : name
-    return shortname.gsub(/(^https?:\/\/|\/$)/, '')
+    self.login
   end
 
   protected
