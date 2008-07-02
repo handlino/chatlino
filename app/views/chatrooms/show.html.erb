@@ -1,35 +1,48 @@
-<div id="top">
-    <div id="topmenu"></div>
-</div>
-
-<div id='content'></div>
-
-<div id='chat-subject'>
-  <div id='chat-subject-toolbar'></div>
-  <div id='chat-subject-object'><%= image_tag "/images/logo.png" %></div>
-</div>
-
-<div id="chat-screen">
-  <table id="chat-data">
-    <tbody id="chat-data-tbody"></tbody>
-  </table>
-</div>
-
-<div id="chat-input-area">
-  <div id="chat-input-textarea" style="background: #999; height:20px; width:20px; color: #555;">
-    <% form_remote_tag(
-      :html => { :id => "chat-input-form" },
-      :url => chatroom_say_path( :id => @chatroom.id ) ,
-      :loading => "Form.disable('chat-input-form')",
-      :complete => "$('chat-input').value='';Form.enable('chat-input-form');$('chat-input').focus()") do %>
-      <div>
-        <%= text_area_tag "chat-input", "" %>
-	<input type="submit" id="chat-input-submit" value="<%= _ "Send" %>">
-      </div>
-    <% end %>
+<div class="inner">
+  <div class="span-10">
+    <div id="chat-screen" class="room chat">
+      <table id="chat-data">
+        <tbody id="chat-data-tbody"></tbody>
+      </table>
+    </div>
   </div>
-  <div id="chat-input-userinfo">
-    <%= buddy_icon( current_user, :id => "chat-input-userinfo-photo" ) %>
+
+  <div class="span-6 last">
+    <div class="room list">
+      <div id="chat-subject">
+      </div>
+    </div>
+    <div class="room user list">
+      <div id="chatroom-userlist">
+        <% @chatroom.users.each do |u| %>
+        <div class="item" id="chatroom-userlist-user<%= u.id %>">
+          <%= buddy_icon(u, :small) %>
+          <span><%= user_link(u) %></span>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="span-10">
+    <div id="chat-input-area">
+      <div id="chat-input-textarea">
+        <% form_remote_tag(
+           :html => { :id => "chat-input-form" },
+        :url => chatroom_say_path( :id => @chatroom.id ) ,
+        :loading => "Form.disable('chat-input-form')",
+        :complete => "$('chat-input').value='';Form.enable('chat-input-form');$('chat-input').focus()") do %>
+        <div>
+          <%= text_area_tag "chat-input", "", :class => "room text" %>
+	  <input type="submit" id="chat-input-submit" class="room say" value="<%= _ "Send" %>">
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="room info span-6 last">
+    <div class="room online">123456 users online</div>
+    <%= image_tag "logo-lite.png" %>
   </div>
 </div>
 

@@ -3,19 +3,26 @@ body {
     padding: 0;
 }
 
+body.room {
+    background: #2fcc24;
+}
+
+.clear {
+    clear: both;
+}
+
 #container-background-right {
     margin: 0 auto;
     width: 1000px;
-    background: url(../../images/right-wrap.png) top right repeat-y;
+    background: url(/images/right-wrap.png) top right repeat-y;
 }
 
 #container-background-left {
     width: 760px;
     padding-left: 120px;
     padding-right: 0;
-    min-height: 700px;
     margin: 0;
-    background: url(../../images/left-wrap.png) left top repeat-y;
+    background: url(/images/left-wrap.png) left top repeat-y;
 }
 
 .chatlino.container:after {
@@ -34,7 +41,7 @@ img.title {
 
 #container {
     padding: 0;
-    margin: 0;
+    margin: 0 auto;
     width: 760px;
     background: #2fcc24;
 }
@@ -51,20 +58,20 @@ img.title {
 }
 
 #left-head {
-    background: url(../../images/left-head.png) top left no-repeat;
+    background: url(/images/left-head.png) top left no-repeat;
 }
 
 #right-head {
-    background: url(../../images/right-head.png) top left no-repeat;
+    background: url(/images/right-head.png) top left no-repeat;
 }
 
 #bd {
-    background: url(../../images/bd.png) top left repeat;
-    min-height: 600px;
+    background: url(/images/bd.png) top left repeat;
+    min-height: 500px;
 }
 
 #ft {
-    background: url(../../images/ft.png) top left no-repeat;
+    background: url(/images/ft.png) top left no-repeat;
     height: 150px;
 }
 
@@ -120,4 +127,120 @@ input.login-openid {
 
 .copyright {
     color: #333;
+}
+
+#hd.room {
+    height: 80px;
+    background: url(/images/room-head.png);
+    width: 760px;
+}
+
+#bd.room,
+#ft.room {
+    background: url(/images/room-body.png);    
+}
+
+#ft.room {
+    height: 30px;
+}
+
+#hd .system {
+    float: right;
+    margin-right: 60px;
+    margin-top: 15px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.signout {
+    color: #fff;
+}
+
+.setting {
+    color: #0069f5;
+}
+
+.room .inner {
+    width: 670px !important;
+}
+
+.room.chat {
+    width: 390px;
+    height: 420px;
+    background: url(/images/room-chat.png);
+    float: left;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.room.list {
+    width: 270px;
+    height: 200px;
+    background: url(/images/room-list.png);
+    margin-bottom: 20px;
+}
+
+.room.text {
+    height: 40px;
+    border: 1px solid #ffa000;
+    background: #fffaf1;
+    margin: 0;
+    padding: 0;
+    width: 300px;
+    float: left;
+    margin-right: 10px;
+}
+
+.room.say {
+    height: 50px;
+    width: 60px;
+    background: #ffa000;
+    border: 1px solid #ffa000;
+    margin: 0;
+    color: #fff;
+    font-size: 13px;
+    font-weight: bold;
+    float: left;
+}
+
+#container.room {
+    background: url(/images/room-body.png);
+}
+
+body.room {
+    background: #2fcc24 url(/images/room-body.png);
+    background-position: 50% 0%; 
+    background-repeat: repeat-y;
+}
+
+.room .message {
+    width: 365px;
+    margin: 5px;
+    margin-right: 20px;
+}
+
+.room.chat .head {
+    width: 30px;
+    float: left;
+}
+
+.room.chat .sentence {
+    width: 260px;
+    float: left;
+}
+
+.room.user.list {
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.room.user.list ul {
+    margin: 10px;
+    list-style-type: none;
+}
+
+.room.user.list li {
+    background: rgb(246,246,246);
+    line-height: 2em;
+    border-bottom: 1px solid #fff;
 }

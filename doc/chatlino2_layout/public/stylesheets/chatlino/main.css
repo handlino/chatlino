@@ -7,6 +7,10 @@ body.room {
     background: #2fcc24;
 }
 
+.clear {
+    clear: both;
+}
+
 #container-background-right {
     margin: 0 auto;
     width: 1000px;
@@ -105,6 +109,10 @@ input.login-openid {
     background: #eee;
 }
 
+.login-openid:focus {
+    background: #fff;
+}
+
 .room-name {
     color: #2ecc24;
     font-size: 24px;
@@ -116,6 +124,10 @@ input.login-openid {
     color: #fff;
     font-size: 14px;
     padding: 7px 18px;
+}
+
+.copyright {
+    color: #333;
 }
 
 #hd.room {
@@ -153,38 +165,87 @@ input.login-openid {
     width: 670px !important;
 }
 
-.room-chat {
+.room.chat {
     width: 390px;
     height: 420px;
     background: url(../../images/room-chat.png);
+    float: left;
+    overflow: hidden;
+    overflow-y: scroll;
 }
 
-.room-list {
+.room.list {
     width: 270px;
     height: 200px;
     background: url(../../images/room-list.png);
     margin-bottom: 20px;
 }
 
-.room-text {
-    height: 40px;
+.room.text {
+    height: 50px;
     border: 1px solid #ffa000;
     background: #fffaf1;
     margin: 0;
-    width: 320px;
+    padding: 0;
+    width: 300px;
+    float: left;
+    margin-right: 10px;
 }
 
-.room-say {
-    height: 45px;
+.room.say {
+    height: 50px;
     width: 60px;
     background: #ffa000;
-    border: 0;
+    border: 1px solid #ffa000;
     margin: 0;
     color: #fff;
     font-size: 13px;
     font-weight: bold;
+    float: left;
+}
+
+.room.info {
+    text-align: right;
 }
 
 #container.room {
     background: url(../../images/room-body.png);
+}
+
+body.room {
+    background: #2fcc24 url(../../images/room-body.png);
+    background-position: 50% 0%; 
+    background-repeat: repeat-y;
+}
+
+.room .message {
+    width: 365px;
+    margin: 5px;
+    margin-right: 20px;
+}
+
+.room.chat .head {
+    width: 30px;
+    float: left;
+}
+
+.room.chat .sentence {
+    width: 260px;
+    float: left;
+}
+
+.room.user.list {
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.room.user.list ul {
+    margin: 10px;
+    list-style-type: none;
+}
+
+.room.user.list li {
+    background: rgb(246,246,246);
+    line-height: 2em;
+    border-bottom: 1px solid #fff;
 }

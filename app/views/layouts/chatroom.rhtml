@@ -3,31 +3,33 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Chatlino</title>
-    <%= stylesheet_link_tag *(['main'] + @stylesheets) %>
+    <%= stylesheet_link_tag "blueprint/screen" %>
+    <%= stylesheet_link_tag "main" %>
+
     <%= javascript_include_tag "prototype","effects","controls" %>
     <%= javascript_include_tag "juggernaut/swfobject", "juggernaut/juggernaut","application" %>
     <%= javascript_include_tag "jsan/JSAN", "jsan/DOM/Ready", "jsan/DOM/Events", "jsan/Effect/RoundedCorners" %>
     <%= javascript_include_tag "jsan/Asynapse/Emoticon", "jsan/Widget/Lightbox", "json" %>
     <%= javascript_include_tag "chatroom" %>
+
   </head>
+  <body class="room">
+    <%= juggernaut :client_id => current_user.login, :channels => [ "chat.#{@chatroom.id}" ], :debug => false %>
+    <div id="container" class="room">
+      <div id="hd" class="room">
+	<div class="system">
 
-  <body>
-  
-  <%= juggernaut :client_id => current_user.login, :channels => [ "chat.#{@chatroom.id}" ] %>
-
-    <div id="container">
-        <div id="nav">
-            <ul>
-                <% class_name = ( logged_in? ) ? "" : "signin-link"%>
-                <li><%= link_to (_ "Home"), root_path, :class => class_name %></li>
-                <li><%= link_to (_"Logout"), logout_path %></li>
-            </ul>
-        </div>
-
-        <div id="main"><%= yield %></div>
-        <div id="sidebar"><%= render :partial => 'sidebar' %></div>
-	<div id="dialog"><%= render :partial => "dialog" %></div>
-
+          <% class_name = ( logged_in? ) ? "" : "signin-link"%>
+          <% if logged_in? %>
+          <div class="signout"><%= link_to (_"Logout"), logout_path %></div>
+          <% end %>
+	  <div class="setting">Setting</div>
+	</div>
+      </div>
+      <div id="bd" class="room">
+        <%= yield %>
+      </div>
+      <div id="ft" class="room"></div>
     </div>
   </body>
 </html>
