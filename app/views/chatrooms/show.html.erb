@@ -1,9 +1,19 @@
+<!--
+vim: syntax=eruby
+-->
 <div class="inner">
   <div class="span-10">
     <div id="chat-screen" class="room chat">
       <table id="chat-data">
         <tbody id="chat-data-tbody"></tbody>
       </table>
+
+      <div class="message">
+          <div class="head"><%= image_tag "buddy-icon-30.png" %></div>
+          <div class="body">asjdf;lkadjsfkla;djsklfja;sdjflaf;lkjasdlkfjklasdjf;klajsdlkf;jaklsdjf;j</div>
+          <div class="clear"></div>
+      </div>
+
     </div>
   </div>
 
@@ -13,6 +23,13 @@
       </div>
     </div>
     <div class="room user list">
+        <ul>
+        <% @chatroom.users.each do |u| %>
+            <li><%= buddy_icon(u, :small) || image_tag("buddy-icon-16.png") %><span><%= user_link(u) %></span></li>
+        <% end %>
+        </ul>
+      <!-- original code 
+
       <div id="chatroom-userlist">
         <% @chatroom.users.each do |u| %>
         <div class="item" id="chatroom-userlist-user<%= u.id %>">
@@ -21,6 +38,8 @@
         </div>
         <% end %>
       </div>
+
+      -->
     </div>
   </div>
 
@@ -29,9 +48,9 @@
       <div id="chat-input-textarea">
         <% form_remote_tag(
            :html => { :id => "chat-input-form" },
-        :url => chatroom_say_path( :id => @chatroom.id ) ,
-        :loading => "Form.disable('chat-input-form')",
-        :complete => "$('chat-input').value='';Form.enable('chat-input-form');$('chat-input').focus()") do %>
+           :url => chatroom_say_path( :id => @chatroom.id ) ,
+           :loading => "Form.disable('chat-input-form')",
+           :complete => "$('chat-input').value='';Form.enable('chat-input-form');$('chat-input').focus()") do %>
         <div>
           <%= text_area_tag "chat-input", "", :class => "room text" %>
 	  <input type="submit" id="chat-input-submit" class="room say" value="<%= _ "Send" %>">
