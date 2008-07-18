@@ -1,0 +1,48 @@
+# Load balance to mongrels
+upstream mongrel_cluster_3 {
+    server 127.0.0.1:13000;
+    server 127.0.0.1:13001;
+}
+
+# Begin virtual host configuration
+server {
+    # Familiar HTTP settings
+    listen 80;
+    server_name chat.handlino.com;
+    root /home/chatlino/current/public;
+    access_log /var/log/nginx/chatlino.at.access.log;
+    error_page 500 502 503 504 /500.html;
+    client_max_body_size 50M;
+    # First rewrite rule for handling maintenance page
+    if (-f $document_root/system/maintenance.html) {
+        rewrite ^(.*)$ /system/maintenance.html last;
+        break;
+    }
+    
+    location / {
+       index index.html index.htm;
+       # Forward information about the client and host
+       # Otherwise our Rails app wouldn't have access to it
+       proxy_set_header X-Real-IP $remote_addr;
+       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+       proxy_set_header Host $http_host;
+       proxy_max_temp_file_size 0;
+       # Directly serve static content
+       location ~ ^/(images|javascripts|stylesheets)/ {
+           expires 10y;
+       }
+
+       if (-f $request_filename) {
+           break;
+       }
+       # Directly serve cached pages
+       if (-f $request_filename.html) {
+           rewrite (.*) $1.html break;
+       }
+       # Otherwise let Mongrel handle the request
+       if (!-f $request_filename) {
+           proxy_pass http://mongrel_cluster_3;
+           break;
+       }
+    }
+}

@@ -1,0 +1,7 @@
+--- 
+cwd: /home/chatlino/current
+log_file: log/mongrel.log
+port: "13000"
+environment: production
+pid_file: tmp/pids/mongrel.pid
+servers: 2
