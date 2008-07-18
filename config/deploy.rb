@@ -39,9 +39,17 @@ namespace :deploy do
    run <<-EOF
      cp #{db_config} #{release_path}/config/database.yml
    EOF
-      
+
    run <<-EOF
-      ln -s #{shared_path}/upload #{latest_release}/public/upload
+     cp #{shared_path}/config/juggernaut.yml #{release_path}/config/
+   EOF
+   
+   run <<-EOF
+     cp #{shared_path}/config/juggernaut_hosts.yml #{release_path}/config/
+   EOF
+   
+   run <<-EOF
+     ln -s #{shared_path}/upload #{latest_release}/public/upload
    EOF
     
  end
