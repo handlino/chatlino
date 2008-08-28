@@ -7,9 +7,9 @@ set :repository,  "http://code.handlino.com/svn/Chatlino/trunk"
 set :deploy_to, "/home/chatlino"
 set :user, "chatlino"
 set :password, "3c4v6b"
-set :port, "723"
+set :port, "22"
 #set :rake, "/opt/local/bin/rake" # Mac
-set :rake, "/usr/bin/rake" # Ubuntu Slice
+set :rake, "/usr/local/bin/rake" # Ubuntu Slice
 
 set :group, "chatlino"
 set :scm_username, "chatlino" # svn user name
@@ -21,15 +21,15 @@ ssh_options[:paranoid] = false
   
 # This's because Capistrano will not load environment variables
 #default_environment["PATH"] = "/Users/registrano/bin:/opt/local/bin:/usr/local/svn/bin:/bin:/sbin:/usr/bin:/usr/sbin" # Mac
-default_environment["PATH"] = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11:/usr/games" # Ubuntu Slice
+#default_environment["PATH"] = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11:/usr/games" # Ubuntu Slice
 
 # If you aren't using Subversion to manage your source code, specify
 # your SCM below:
 # set :scm, :subversion
 
-role :app, "67.207.129.40"
-role :web, "67.207.129.40"
-role :db,  "67.207.129.40", :primary => true
+role :app, "61.63.25.198"
+role :web, "61.63.25.198"
+role :db,  "61.63.25.198", :primary => true
 
 namespace :deploy do
  desc "Create database.yml and asset packages for production" 
