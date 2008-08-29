@@ -28,7 +28,7 @@ Chatroom.prototype = {
             me = this.me
 
         try {
-            new Insertion.Bottom('chat-data-tbody',
+            new Insertion.Bottom('chat-screen',
                 this.make_chat_message("message",
                 message, me));
             this.scrollToBottom();
@@ -40,11 +40,11 @@ Chatroom.prototype = {
             me = this.me
 
         try {
-            new Insertion.Bottom('chat-data-tbody',
+            new Insertion.Bottom('message',
                 this.make_chat_message("act", message,
                 me));
             this.scrollToBottom();
-            new Effect.Highlight($("chat-data-tbody").lastChild,
+            new Effect.Highlight($("message").lastChild,
                                  {startcolor:'#ff9999', endcolor:'#ffffaa'})
         } catch(e) {
         }
@@ -54,24 +54,14 @@ Chatroom.prototype = {
     make_chat_message: function(message_class, message, me) {
         var user_class = 'user-id-' + me.id;
         message_class = "chat-data-" + message_class;
-        var html = '<tr class="' + message_class + ' ' + user_class +'">'
-                + '<td class="chat-data-time">'
-                + message.time
-                + '</td>'
-                + '<td class="chat-data-username">'
-                + '<img width="24" height="24" src="' + me.photo_path + '">'
-
-                + ( ( message_class == "chat-data-message") ?
-                    ('<span class="username">' + me.shortname + '</span>') :'')
-
-                + '</td><td class="chat-data-sentence">'
-
-                + ( (message_class == "chat-data-act") ?
-                    ('<span class="username">' + me.shortname + '</span> ') :'')
-
-                + '<span>'
+        var html =
+				'<div class="head">'
+				+'<img width="24" height="24" src="' + me.photo_path + '">'
+				+'</div>'
+				+'<div class ="body">'
                 + Chatroom.filter_message(message.body)
-                + '</span></td></tr>';
+                + '</div>'
+				+ '<div class="clear"></div>';
 
         return html;
     },
@@ -247,7 +237,7 @@ Chatroom.prototype = {
 
     Event: {
         append: function(message) {
-            new Insertion.Bottom('chat-data-tbody', '<tr class="chat-event"><td colspan="3">' + message + '</td></tr>');
+            new Insertion.Bottom('chat-screen', '<div class="message"><div class="body">' + message + '</div><div class="clear"></div></div>');
             Chatroom.scrollToBottom();
         },
 
